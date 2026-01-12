@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shashwat Raj | ML Engineer</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="aura-glow"></div>
+
+    <div id="start-overlay" onclick="startExperience()">
+        <button class="btn btn-play ripple">
+            <img src="assets/gifs/click.gif" alt="Click to Experience" style="width: 150px; height: auto;">
+        </button>
+    </div>
+
+    <div id="splash-screen" style="display: none;">
+        <div class="netflix-intro-container">
+            <svg class="netflix-logo-svg" viewBox="0 0 1000 600">
+                <defs>
+                    <path id="curve-path" d="M 100,450 Q 500,150 900,450" />
+                </defs>
+                <text class="curved-text">
+                    <textPath xlink:href="#curve-path" startOffset="50%" text-anchor="middle">
+                        SHASHWAT RAJ
+                    </textPath>
+                </text>
+            </svg>
+            <div class="spectrum-container">
+                <!-- Spectrum lines will be generated here -->
+            </div>
+        </div>
+        <audio id="intro-sound" src="assets/audio/Netflix-Intro-Sound-Effect.mp3" preload="auto"></audio>
+    </div>
+
+    <div id="profile-selection" style="display: none;">
+        <h1 class="profiles-title">Who's Watching?</h1>
+        <div class="profiles-container">
+            <div class="profile-card" onclick="selectProfile('Recruiter')">
+                <div class="profile-img-container">
+                    <img src="assets/icons/recruiter.png" alt="Recruiter" class="profile-img">
+                </div>
+                <span class="profile-name">Recruiter</span>
+            </div>
+            <div class="profile-card" onclick="selectProfile('Developer')">
+                <div class="profile-img-container">
+                    <img src="assets/icons/developer.png" alt="Developer" class="profile-img">
+                </div>
+                <span class="profile-name">Developer</span>
+            </div>
+            <div class="profile-card" onclick="selectProfile('Stalker')">
+                <div class="profile-img-container">
+                    <img src="assets/icons/stalker.png" alt="Stalker" class="profile-img">
+                </div>
+                <span class="profile-name">Stalker</span>
+            </div>
+            <div class="profile-card" onclick="selectProfile('Adventurer')">
+                <div class="profile-img-container">
+                    <img src="assets/icons/adventurer.png" alt="Adventurer" class="profile-img">
+                </div>
+                <span class="profile-name">Adventurer</span>
+            </div>
+        </div>
+    </div>
+
+    <div id="main-app" style="display: none;">
+        <nav id="navbar">
+            <div class="logo">Shashwat Raj</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#professional">Experience</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#projects">Achievements</a></li>
+                <li><a href="#education">Education</a></li>
+                <li><a href="#hire-me">Contact</a></li>
+            </ul>
+        </nav>
+
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">Shashwat Raj</h1>
+                <p class="hero-description">ML Engineer with a strong foundation in Mathematics & Computing from IIT
+                    Delhi. Passionate about building scalable AI systems and solving real-world problems through
+                    data-driven insights.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-play" onclick="window.open('#hire-me', '_self')">Hire Me</button>
+                    <button class="btn btn-info"
+                        onclick="window.open('https://linkedin.com/in/shashwatraj-iitd', '_blank')">LinkedIn</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="category-row">
+            <h2 class="row-title">Today's Top Picks</h2>
+            <div class="row-posters">
+                <div class="row-poster row-posterLarge"
+                    style="background-color: #333; min-width: 180px; height: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px;">
+                    <span style="font-size: 1.2rem; font-weight: bold;">GenAI</span>
+                    <span style="font-size: 0.8rem;">Creative Generation Framework</span>
+                </div>
+                <div class="row-poster row-posterLarge"
+                    style="background-color: #444; min-width: 180px; height: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px;">
+                    <span style="font-size: 1.2rem; font-weight: bold;">Forecasting</span>
+                    <span style="font-size: 0.8rem;">Revenue Anomaly Detection</span>
+                </div>
+                <div class="row-poster row-posterLarge"
+                    style="background-color: #555; min-width: 180px; height: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px;">
+                    <span style="font-size: 1.2rem; font-weight: bold;">Computer Vision</span>
+                    <span style="font-size: 0.8rem;">OCR & Document Verification</span>
+                </div>
+                <div class="row-poster row-posterLarge"
+                    style="background-color: #333; min-width: 180px; height: 250px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; padding: 10px;">
+                    <span style="font-size: 1.2rem; font-weight: bold;">IIT Delhi</span>
+                    <span style="font-size: 0.8rem;">B.Tech Maths & Computing</span>
+                </div>
+            </div>
+        </section>
+
+        <section id="professional">
+            <h2 class="section-title">Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h2>ML Engineer - Leadership Associate</h2>
+                        <h3>Purplle.com (Manash Lifestyle Pvt. Ltd.)</h3>
+                        <p>Developed intelligent parsing agents and GenAI creative-generation framework using OpenAI.
+                            Established analytics pipeline for CTR and conversion metrics.</p>
+                        <span class="date">May 2025 - Ongoing</span>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h2>Software Developer - ML Domain</h2>
+                        <h3>Samsung R&D</h3>
+                        <p>Built time series forecasting models (ARIMA, Prophet, TFT) for Samsung Ads. Deployed models
+                            on Apache Kafka for real-time data ingestion.</p>
+                        <span class="date">May 2025 - July 2025</span>
+                    </div>
+                </div>
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h2>ML Research Internship</h2>
+                        <h3>Cornell Tech</h3>
+                        <p>Improved feature extraction efficiency by 15% using ZF/Inception CNNs. Developed OCR models
+                            matching 95%+ accuracy. Designed custom loss functions.</p>
+                        <span class="date">June 2024 - July 2024</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="skills">
+            <h2 class="section-title">Technical Skills</h2>
+            <div class="skills-categories">
+                <div class="skill-category">
+                    <h3 class="category-title">Languages</h3>
+                    <div class="skill-tiles">
+                        <div class="skill-tile">
+                            <img src="assets/icons/languages/python.png" alt="Python">
+                            <span class="skill-name">Python</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/languages/C++.png" alt="C++">
+                            <span class="skill-name">C++</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/languages/Java.png" alt="Java">
+                            <span class="skill-name">Java</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/languages/SQL.png" alt="SQL">
+                            <span class="skill-name">SQL</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/languages/JS.png" alt="JavaScript">
+                            <span class="skill-name">JavaScript</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/languages/TS.png" alt="TypeScript">
+                            <span class="skill-name">TypeScript</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="category-title">Frameworks</h3>
+                    <div class="skill-tiles">
+                        <div class="skill-tile">
+                            <img src="assets/icons/Frameworks/pytorch.png" alt="PyTorch">
+                            <span class="skill-name">PyTorch</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/Frameworks/tensorflow.png" alt="TensorFlow">
+                            <span class="skill-name">TensorFlow</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/Frameworks/keras.png" alt="Keras">
+                            <span class="skill-name">Keras</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/Frameworks/Numpy.png" alt="NumPy">
+                            <span class="skill-name">NumPy</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/Frameworks/seaborn.png" alt="Seaborn">
+                            <span class="skill-name">Seaborn</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="category-title">Platforms</h3>
+                    <div class="skill-tiles">
+                        <div class="skill-tile">
+                            <img src="assets/icons/Platforms/GCP.png" alt="Google Cloud Platform">
+                            <span class="skill-name">GCP</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/Platforms/BigQ.png" alt="BigQuery">
+                            <span class="skill-name">BigQuery</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/Platforms/Kafka.png" alt="Apache Kafka">
+                            <span class="skill-name">Kafka</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/Platforms/Github.png" alt="GitHub">
+                            <span class="skill-name">GitHub</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/Platforms/Cursor.png" alt="Cursor">
+                            <span class="skill-name">Cursor</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/Platforms/Antigravity.png" alt="Antigravity">
+                            <span class="skill-name">Antigravity</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-category">
+                    <h3 class="category-title">Tools</h3>
+                    <div class="skill-tiles">
+                        <div class="skill-tile">
+                            <img src="assets/icons/Tools/aws.png" alt="AWS">
+                            <span class="skill-name">AWS</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/Tools/openai.png" alt="OpenAI">
+                            <span class="skill-name">OpenAI</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/Tools/claude.png" alt="Claude">
+                            <span class="skill-name">Claude</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/Tools/huggingface.png" alt="Hugging Face">
+                            <span class="skill-name">Hugging Face</span>
+                        </div>
+                        <div class="skill-tile">
+                            <img src="assets/icons/Tools/vertexai.png" alt="Vertex AI">
+                            <span class="skill-name">Vertex AI</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="projects">
+            <h2 class="section-title">Achievements</h2>
+            <div class="skills-grid">
+                <div class="skill-card" style="background: rgba(229, 9, 20, 0.1);">
+                    <h4>JEE Advanced & Mains</h4>
+                    <p>99.89 percentile nationwide</p>
+                </div>
+                <div class="skill-card" style="background: rgba(229, 9, 20, 0.1);">
+                    <h4>NTSE Scholar 2019</h4>
+                    <p>Awarded National Talent Scholarship</p>
+                </div>
+                <div class="skill-card" style="background: rgba(229, 9, 20, 0.1);">
+                    <h4>Samsung SWC Test</h4>
+                    <p>Qualified Advanced Software Competency</p>
+                </div>
+                <div class="skill-card" style="background: rgba(229, 9, 20, 0.1);">
+                    <h4>Math Olympiad</h4>
+                    <p>Regional Mathematical Olympiad Merit twice</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="education">
+            <h2 class="section-title">Education</h2>
+            <div class="timeline">
+                <div class="timeline-item left">
+                    <div class="timeline-content">
+                        <h2>B.Tech. in Mathematics & Computing</h2>
+                        <h3>Indian Institute of Technology, Delhi</h3>
+                        <p>Focused on advanced computation and algorithm design. CGPA: 7/10</p>
+                        <span class="date">Oct 2021 - May 2025</span>
+                    </div>
+                </div>
+                <div class="timeline-item right">
+                    <div class="timeline-content">
+                        <h2>High School</h2>
+                        <h3>Stephens International Public School</h3>
+                        <p>Computer Science focus. Grade: 95%</p>
+                        <span class="date">March 2019 - May 2021</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="hire-me" style="text-align: center; padding-bottom: 100px;">
+            <h2 class="section-title">Get In Touch</h2>
+            <p style="font-size: 1.5rem; color: #ccc;">Looking for a scalable AI solution?</p>
+            <div style="margin-top: 30px;">
+                <button class="btn btn-play" style="margin: 0 auto;"
+                    onclick="window.location.href='mailto:rajshashwatiitd@gmail.com'">Email Shashwat</button>
+            </div>
+            <div
+                style="margin-top: 40px; color: var(--netflix-light-grey); display: flex; justify-content: center; gap: 30px; font-size: 0.9rem;">
+                <span><i class="fab fa-linkedin"></i> linkedin.com/in/shashwatraj-iitd</span>
+                <span><i class="fab fa-github"></i> github.com/Shaz-gif</span>
+                <span><i class="fas fa-map-marker-alt"></i> Mumbai, Maharashtra</span>
+            </div>
+        </section>
+
+        <footer
+            style="padding: 50px 4%; border-top: 1px solid #333; color: var(--netflix-light-grey); font-size: 0.8rem; text-align: center;">
+            <p>&copy; 2025 Shashwat Raj. Developed as a cinematic portfolio.</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
