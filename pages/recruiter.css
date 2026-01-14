@@ -70,11 +70,14 @@
     font-family: 'Netflix Sans', 'Helvetica Neue', Helvetica, Arial, sans-serif;
     display: inline-block;
     position: relative;
-    transform: perspective(300px) rotateX(8deg);
-    transform-origin: center center;
-    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    line-height: 1.2;
+}
+
+.recruiter-navbar .logo span {
+    display: inline-block;
 }
 
 .recruiter-navbar .nav-links {
@@ -139,7 +142,7 @@
 /* Hero Section with Background Video/GIF */
 .recruiter-hero {
     position: relative;
-    min-height: 70vh;
+    min-height: calc(70vh + 70px); /* Include navbar height */
     display: flex;
     align-items: center;
     justify-content: center;
