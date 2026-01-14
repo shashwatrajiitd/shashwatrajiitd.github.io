@@ -24,6 +24,7 @@ const startExperience = () => {
         const line = document.createElement('div');
         line.className = 'spectrum-line';
 
+        
         // Scattered horizontally but perfectly straight vertically
         const xPos = Math.random() * 100;
         const width = Math.random() * 10 + 2; // Varying widths for visual depth
