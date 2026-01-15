@@ -245,7 +245,7 @@ function initializeVideoCarousel(profileType) {
     
     // List of videos for the profile type
     const videoFiles = {
-        'recruiter_profile': [],
+        'recruiter_profile': ['r0.mp4'],
         'developer_profile': ['v0.mp4', "v1.mp4", "v2.mp4"],
         'adventurer_profile': [ 'suits.mp4', 'bb.mp4'], // Add videos when available
         'stalker_profile': ["s0.mp4"] // Add videos when available
