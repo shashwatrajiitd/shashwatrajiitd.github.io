@@ -189,16 +189,50 @@ function initializeDeveloperPage() {
         }, 500);
     }
     
-    // Load background video carousel
-    initializeVideoCarousel('developer_profile');
+    // Load background video carousel - wait a bit for DOM to be ready
+    setTimeout(() => {
+        console.log('Initializing video carousel for developer profile');
+        initializeVideoCarousel('developer_profile');
+    }, 300);
 }
 
 // Initialize Netflix-style video carousel
 let videoCarouselInterval = null; // Store interval to prevent multiple instances
 
 function initializeVideoCarousel(profileType) {
-    const videoContainer = document.getElementById('hero-video-container');
-    if (!videoContainer) return;
+    console.log(`Initializing video carousel for: ${profileType}`);
+    
+    // Try to find video container in current profile page first
+    const pageContainer = document.getElementById('profile-page-container');
+    let videoContainer = null;
+    
+    if (pageContainer) {
+        // Look for video container within the current profile page
+        const currentPage = pageContainer.querySelector('[id$="-page"]');
+        if (currentPage) {
+            videoContainer = currentPage.querySelector('#hero-video-container');
+        }
+    }
+    
+    // Fallback to global search
+    if (!videoContainer) {
+        videoContainer = document.getElementById('hero-video-container');
+    }
+    
+    if (!videoContainer) {
+        console.error('hero-video-container not found');
+        // Try again after a short delay
+        setTimeout(() => {
+            const retryContainer = document.getElementById('hero-video-container');
+            if (retryContainer) {
+                console.log('Found video container on retry, initializing...');
+                initializeVideoCarousel(profileType);
+            }
+        }, 500);
+        return;
+    }
+    
+    console.log('Video container found:', videoContainer);
     
     // Clear any existing carousel interval
     if (videoCarouselInterval) {
@@ -211,14 +245,19 @@ function initializeVideoCarousel(profileType) {
     
     // List of videos for the profile type
     const videoFiles = {
-        'recruiter_profile': ['bb.mp4', 'suits.mp4'],
-        'developer_profile': [], // Add videos when available
-        'adventurer_profile': [], // Add videos when available
-        'stalker_profile': [] // Add videos when available
+        'recruiter_profile': [],
+        'developer_profile': ['v0.mp4', "v1.mp4", "v2.mp4"],
+        'adventurer_profile': [ 'suits.mp4', 'bb.mp4'], // Add videos when available
+        'stalker_profile': ["s0.mp4"] // Add videos when available
     };
     
     const videos = videoFiles[profileType] || [];
-    if (videos.length === 0) return;
+    if (videos.length === 0) {
+        console.warn(`No videos found for profile type: ${profileType}`);
+        return;
+    }
+    
+    console.log(`Found ${videos.length} videos for ${profileType}:`, videos);
     
     let currentVideoIndex = 0;
     let videoElements = [];
@@ -227,12 +266,18 @@ function initializeVideoCarousel(profileType) {
     videos.forEach((videoFile, index) => {
         const video = document.createElement('video');
         video.className = 'hero-video';
-        video.src = `assets/bg_videos/${profileType}/${videoFile}`;
+        // Use correct relative path from pages/ directory
+        const videoPath = `../assets/bg_videos/${profileType}/${videoFile}`;
+        video.src = videoPath;
+        video.type = 'video/mp4'; // Explicitly set MIME type for MP4 files
         video.autoplay = true;
         video.muted = true;
         video.loop = true;
         video.playsInline = true;
         video.preload = 'auto'; // Preload videos for smoother transitions
+        video.setAttribute('webkit-playsinline', 'true'); // iOS support
+        
+        console.log(`Loading video: ${videoPath}`);
         
         // Set first video as active
         if (index === 0) {
@@ -241,15 +286,54 @@ function initializeVideoCarousel(profileType) {
         
         // Handle video load errors
         video.addEventListener('error', (e) => {
-            console.warn(`Failed to load video: ${videoFile}`, e);
+            console.error(`Failed to load video: ${videoFile}`, e);
+            console.error(`Video path attempted: ${videoPath}`);
+            if (video.error) {
+                console.error(`Video error code: ${video.error.code}`);
+                console.error(`Video error message: ${video.error.message}`);
+            }
+            // Note: .mov files may not be supported in all browsers
+            // Consider converting to .mp4 for better browser compatibility
+        });
+        
+        // Log when video source is set
+        video.addEventListener('loadstart', () => {
+            console.log(`Video load started: ${videoFile}`);
         });
         
         // Ensure video plays when loaded
         video.addEventListener('loadeddata', () => {
+            console.log(`Video loaded: ${videoFile}`);
             if (index === 0) {
                 // Only autoplay the first video
+                setTimeout(() => {
+                    video.play().then(() => {
+                        console.log(`Video playing: ${videoFile}`);
+                    }).catch(err => {
+                        console.warn(`Failed to autoplay video: ${videoFile}`, err);
+                        // Try again after a short delay
+                        setTimeout(() => {
+                            video.play().catch(e => console.warn('Retry failed:', e));
+                        }, 500);
+                    });
+                }, 100);
+            }
+        });
+        
+        // Also try to play on canplay event
+        video.addEventListener('canplay', () => {
+            if (index === 0 && video.paused) {
                 video.play().catch(err => {
-                    console.warn(`Failed to autoplay video: ${videoFile}`, err);
+                    console.warn(`Failed to play video on canplay: ${videoFile}`, err);
+                });
+            }
+        });
+        
+        // Try to play on loadedmetadata as well
+        video.addEventListener('loadedmetadata', () => {
+            if (index === 0 && video.paused) {
+                video.play().catch(err => {
+                    console.warn(`Failed to play video on loadedmetadata: ${videoFile}`, err);
                 });
             }
         });
@@ -265,13 +349,14 @@ function initializeVideoCarousel(profileType) {
     
     // Function to switch to next video
     function switchToNextVideo() {
-        if (videoElements.length === 0 || videoElements.length === 1) return;
+        if (videoElements.length === 0) return;
         
         const currentVideo = videoElements[currentVideoIndex];
         currentVideo.classList.remove('active');
         currentVideo.classList.add('fade-out');
+        currentVideo.pause();
         
-        // Move to next video
+        // Move to next video (loop back to first if at end)
         currentVideoIndex = (currentVideoIndex + 1) % videoElements.length;
         
         const nextVideo = videoElements[currentVideoIndex];
@@ -281,15 +366,38 @@ function initializeVideoCarousel(profileType) {
             currentVideo.classList.remove('fade-out');
             nextVideo.classList.add('active');
             nextVideo.currentTime = 0; // Restart video
-            nextVideo.play().catch(err => {
+            nextVideo.play().then(() => {
+                console.log(`Playing video ${currentVideoIndex + 1} of ${videoElements.length}`);
+            }).catch(err => {
                 console.warn('Failed to play next video', err);
             });
         }, 500); // Small delay for smooth transition
     }
     
-    // Start the carousel - switch videos every 30 seconds
-    if (videoElements.length > 1) {
-        videoCarouselInterval = setInterval(switchToNextVideo, 30000); // 30 seconds
+    // Add 'ended' event listener to each video to play next when current ends
+    videoElements.forEach((video, index) => {
+        video.addEventListener('ended', () => {
+            console.log(`Video ${index + 1} ended, switching to next`);
+            switchToNextVideo();
+        });
+    });
+    
+    // No need for interval - videos will switch automatically when they end
+    // This creates a continuous loop: when last video ends, it loops back to first
+    
+    // Ensure first video starts playing
+    if (videoElements.length > 0) {
+        const firstVideo = videoElements[0];
+        setTimeout(() => {
+            if (firstVideo.paused) {
+                console.log('First video is paused, attempting to play...');
+                firstVideo.play().then(() => {
+                    console.log('First video started playing');
+                }).catch(err => {
+                    console.error('Failed to start first video:', err);
+                });
+            }
+        }, 500);
     }
 }
 

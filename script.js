@@ -407,6 +407,15 @@ const HistoryManager = {
                         initFunction();
                     }
                     
+                    // Reinitialize video carousel for the profile
+                    const profileType = `${profileName.toLowerCase()}_profile`;
+                    if (typeof initializeVideoCarousel === 'function') {
+                        setTimeout(() => {
+                            console.log(`Reinitializing video carousel for ${profileType}`);
+                            initializeVideoCarousel(profileType);
+                        }, 300);
+                    }
+                    
                     // Ensure profile selector is initialized
                     setTimeout(() => {
                         console.log('Initializing profile selector for existing page');
@@ -913,12 +922,21 @@ async function loadProfilePage(profileName) {
                 // Setup mobile menu for dynamically loaded pages
                 setupMobileMenu();
                 
+                // Ensure video carousel is initialized
+                const profileType = `${profileName.toLowerCase()}_profile`;
+                if (typeof initializeVideoCarousel === 'function') {
+                    setTimeout(() => {
+                        console.log(`Initializing video carousel for ${profileType}`);
+                        initializeVideoCarousel(profileType);
+                    }, 400);
+                }
+                
                 // Ensure profile selector is initialized for all profiles
                 // Use a longer delay to ensure DOM is fully ready
                 setTimeout(() => {
                     console.log('Initializing profile selector after page load');
                     initializeProfileSelectorForAllPages();
-                }, 300);
+                }, 500);
             }, 100);
         };
         
