@@ -424,8 +424,8 @@
     z-index: 2;
     max-width: 1200px;
     width: 100%;
-    padding: 4rem;
-    padding-top: calc(4rem + 70px); /* Add extra padding to account for navbar */
+    padding: 2rem 4%;
+    padding-top: calc(2rem + 60px); /* Add extra padding to account for navbar */
     text-align: left;
     animation: fadeInUp 1s ease;
     display: flex;
@@ -443,7 +443,7 @@
     background: none !important;
     -webkit-background-clip: unset !important;
     background-clip: unset !important;
-    text-shadow: 0 0 10px rgba(255, 255, 255, 0.5), 2px 2px 4px rgba(0, 0, 0, 0.8);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5), 0 0 10px rgba(255, 255, 255, 0.3), 0 0 20px rgba(0, 0, 0, 0.3) !important;
     text-align: left;
 }
 
@@ -452,7 +452,7 @@
     color: #FFFFFF;
     margin-bottom: 1rem;
     font-weight: 400;
-    text-shadow: 0 0 8px rgba(255, 255, 255, 0.4), 1px 1px 3px rgba(0, 0, 0, 0.7);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5), 0 0 8px rgba(255, 255, 255, 0.3), 0 0 15px rgba(0, 0, 0, 0.3) !important;
     text-align: left;
 }
 
@@ -460,10 +460,10 @@
     font-size: 1.1rem;
     line-height: 1.8;
     color: #FFFFFF;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem;
     max-width: 900px;
     text-align: left;
-    text-shadow: 0 0 6px rgba(255, 255, 255, 0.3), 1px 1px 3px rgba(0, 0, 0, 0.7);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5), 0 0 6px rgba(255, 255, 255, 0.3), 0 0 12px rgba(0, 0, 0, 0.3);
 }
 
 .hero-cta-buttons {
@@ -525,14 +525,14 @@ button.btn-primary-cta {
 
 /* Continue Watching Section */
 .continue-watching {
-    padding: 4rem 4%;
+    padding: 1.5rem 4%;
     background: var(--netflix-dark-grey);
 }
 
 .section-title {
     font-size: 1.8rem;
     font-weight: 700;
-    margin-bottom: 0.75rem;
+    margin-bottom: 0.5rem;
     color: #FFFFFF;
     text-align: left;
     text-shadow: 0 0 4px rgba(255, 255, 255, 0.3), 0 0 8px rgba(255, 255, 255, 0.15);
@@ -544,8 +544,8 @@ button.btn-primary-cta {
     gap: 0.5rem;
     overflow-x: auto;
     overflow-y: hidden;
-    padding-top: 0.5rem;
-    padding-bottom: 1rem;
+    padding-top: 0.25rem;
+    padding-bottom: 0.5rem;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     /* Hide scrollbar but keep functionality */
@@ -602,7 +602,7 @@ button.btn-primary-cta {
 
 /* Recruiter Sections */
 .recruiter-section {
-    padding: 100px 4%;
+    padding: 1.5rem 4%;
     background: var(--netflix-black);
     position: relative;
 }
@@ -615,7 +615,7 @@ button.btn-primary-cta {
     width: 100px;
     height: 3px;
     background: var(--netflix-red);
-    margin: 0 auto 3rem;
+    margin: 0 auto 0.75rem;
     border-radius: 2px;
 }
 
@@ -636,7 +636,7 @@ button.btn-primary-cta {
 /* Experience Cards */
 .experience-card {
     max-width: 1000px;
-    margin: 0 auto 3rem;
+    margin: 0 auto 1rem;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
@@ -863,8 +863,8 @@ button.btn-primary-cta {
 }
 
 .project-impact {
-    margin: 2rem 0;
-    padding: 1.5rem;
+    margin: 1rem 0;
+    padding: 1rem;
     background: rgba(229, 9, 20, 0.1);
     border-radius: 8px;
     border-left: 4px solid var(--netflix-red);
@@ -945,7 +945,7 @@ button.btn-primary-cta {
 
 /* Core Technical Skills Section - Netflix Style */
 .core-skills-section {
-    padding: 4rem 4%;
+    padding: 1.5rem 4%;
     background: var(--netflix-black);
     position: relative;
     overflow: visible; /* Allow expanded cards to overflow */
@@ -953,14 +953,14 @@ button.btn-primary-cta {
 
 .core-skills-section .section-title {
     text-align: left;
-    margin-bottom: 1.5rem;
+    margin-bottom: 0.75rem;
     /* Main heading - larger typography */
     font-size: 2.2rem;
     font-weight: 700;
 }
 
 .skills-row {
-    margin-bottom: 1.5rem; /* Reduced spacing between sub-sections */
+    margin-bottom: 0.75rem; /* Netflix-style tight spacing */
     position: relative;
     overflow: visible; /* Allow expanded cards to overflow */
 }
@@ -969,7 +969,7 @@ button.btn-primary-cta {
 .skills-row .section-title {
     font-size: 1.4rem; /* Smaller than main heading (2.2rem) */
     font-weight: 600; /* Slightly lighter than main heading */
-    margin-bottom: 1rem; /* Reduced bottom margin */
+    margin-bottom: 0.5rem;
 }
 
 .skills-row:last-child {
@@ -981,8 +981,8 @@ button.btn-primary-cta {
     gap: 0.5rem;
     overflow-x: auto;
     overflow-y: visible;
-    padding-top: 0.5rem;
-    padding-bottom: 2rem; /* Extra padding for expanded cards */
+    padding-top: 0.25rem;
+    padding-bottom: 1rem;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     /* Hide scrollbar but keep functionality */
@@ -1491,7 +1491,7 @@ button.btn-primary-cta {
 .education-divider {
     height: 1px;
     background: rgba(255, 255, 255, 0.1);
-    margin: 2rem 0;
+    margin: 1rem 0;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
@@ -1547,7 +1547,7 @@ button.btn-primary-cta {
 .achievement-divider {
     height: 1px;
     background: rgba(255, 255, 255, 0.1);
-    margin: 1.5rem 0;
+    margin: 0.75rem 0;
     max-width: 900px;
     margin-left: auto;
     margin-right: auto;
@@ -1567,14 +1567,14 @@ button.btn-primary-cta {
 .contact-subtitle {
     font-size: 1.5rem;
     color: var(--netflix-light-grey);
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
 }
 
 .contact-cta-buttons {
     display: flex;
     justify-content: center;
     gap: 1.5rem;
-    margin-bottom: 4rem;
+    margin-bottom: 1.5rem;
     flex-wrap: wrap;
 }
 
@@ -1606,7 +1606,7 @@ button.btn-primary-cta {
 
 /* Footer */
 .recruiter-footer {
-    padding: 3rem 4%;
+    padding: 1.5rem 4%;
     background: var(--netflix-black);
     text-align: center;
     color: var(--netflix-light-grey);
@@ -1633,28 +1633,28 @@ button.btn-primary-cta {
     }
     
     .core-skills-section {
-        padding: 3rem 1rem;
+        padding: 1.25rem 1rem;
     }
     
     .core-skills-section .section-title {
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
         font-size: 1.8rem; /* Slightly smaller on tablet but still larger than subheadings */
     }
     
     .skills-row .section-title {
         font-size: 1.2rem; /* Smaller subheadings on tablet */
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.25rem;
     }
     
     .skills-row {
-        margin-bottom: 1.25rem; /* Reduced spacing on tablet */
+        margin-bottom: 0.5rem; /* Tight spacing for mobile */
     }
     
     .skills-cards {
         gap: 0.5rem;
         padding-left: 1rem;
         padding-right: 1rem;
-        padding-top: 0.5rem;
+        padding-top: 0.25rem;
     }
     
     .skill-card {
@@ -1840,28 +1840,28 @@ button.btn-primary-cta {
 /* Extra small mobile devices (iPhone 12 Pro, etc.) */
 @media screen and (max-width: 430px) {
     .core-skills-section {
-        padding: 2rem 0.75rem;
+        padding: 1rem 0.75rem;
     }
     
     .core-skills-section .section-title {
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
         font-size: 1.8rem; /* Slightly smaller on tablet but still larger than subheadings */
     }
     
     .skills-row .section-title {
         font-size: 1.2rem; /* Smaller subheadings on tablet */
-        margin-bottom: 0.75rem;
+        margin-bottom: 0.25rem;
     }
     
     .skills-row {
-        margin-bottom: 1.25rem; /* Reduced spacing on tablet */
+        margin-bottom: 0.5rem; /* Tight spacing for mobile */
     }
     
     .skills-cards {
         gap: 0.5rem;
         padding-left: 0.75rem;
         padding-right: 0.75rem;
-        padding-top: 0.5rem;
+        padding-top: 0.25rem;
     }
     
     .skill-card {

@@ -37,11 +37,9 @@ body {
 }
 
 /* Enhanced brightness for headings and important text */
-h1, h2, h3, h4, h5, h6,
+/* Exclude hero title/subtitle/description so profile CSS can apply Netflix-style right-side red stroke */
+h1:not([class*="hero-title"]), h2:not([class*="hero-subtitle"]), h3, h4, h5, h6,
 .section-title,
-.recruiter-hero-title,
-.recruiter-hero-subtitle,
-.hero-description,
 .experience-role,
 .project-title,
 .achievement-title,
@@ -557,12 +555,12 @@ h1, h2, h3, h4, h5, h6,
 
 /* Section Containers */
 section {
-    padding: 100px 4% 0 4%;
+    padding: 10px 4% 0 4%;
 }
 
 .section-title {
     font-size: 2.5rem;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     color: var(--netflix-white);
     text-align: center;
 }
@@ -918,7 +916,7 @@ section {
 .recruiter-hero {
     position: relative;
     min-height: 90vh;
-    padding: 120px 4% 80px;
+    padding: 50px 4% 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -956,7 +954,7 @@ section {
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    text-shadow: 0 0 30px rgba(229, 9, 20, 0.3);
+    /* text-shadow removed – hero title uses Netflix-style right-side red stroke from profile CSS */
 }
 
 .recruiter-hero-subtitle {
@@ -1087,14 +1085,14 @@ button.btn-primary-cta {
 
 /* Highlights Section */
 .recruiter-highlights {
-    padding: 80px 4%;
+    padding: 40px 4%;
     background: var(--netflix-dark-grey);
 }
 
 .recruiter-section-title {
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 3rem;
+    margin-bottom: 2rem;
     color: var(--netflix-white);
     text-align: center;
     letter-spacing: 2px;
@@ -1144,7 +1142,7 @@ button.btn-primary-cta {
 
 /* Recruiter Sections */
 .recruiter-section {
-    padding: 100px 4%;
+    padding: 20px 4%;
     background: var(--netflix-black);
     position: relative;
 }
@@ -1157,7 +1155,7 @@ button.btn-primary-cta {
     width: 100px;
     height: 3px;
     background: var(--netflix-red);
-    margin: 0 auto 3rem;
+    margin: 0 auto 1rem;
     border-radius: 2px;
 }
 
@@ -1178,7 +1176,7 @@ button.btn-primary-cta {
 /* Experience Cards */
 .experience-card {
     max-width: 1000px;
-    margin: 0 auto 3rem;
+    margin: 0 auto 1rem;
     background: rgba(255, 255, 255, 0.03);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 12px;
@@ -1399,7 +1397,7 @@ button.btn-primary-cta {
 
 /* Core Technical Skills Section - Netflix Style */
 .core-skills-section {
-    padding: 100px 4%;
+    padding: 20px 4%;
     background: var(--netflix-black);
     position: relative;
 }
@@ -1407,7 +1405,7 @@ button.btn-primary-cta {
 .core-skills-title {
     font-size: 2.5rem;
     font-weight: 700;
-    margin-bottom: 3rem;
+    margin-bottom: 1rem;
     color: var(--netflix-white);
     text-align: center;
     letter-spacing: 2px;
