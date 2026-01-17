@@ -225,7 +225,8 @@ function initializeStalkerPage() {
 }
 
 // Initialize Netflix-style video carousel
-let videoCarouselInterval = null; // Store interval to prevent multiple instances
+// Use a window-scoped key to avoid top-level `let` collisions across profile scripts.
+window.__videoCarouselInterval = window.__videoCarouselInterval || null;
 
 function initializeVideoCarousel(profileType) {
     console.log(`Initializing video carousel for: ${profileType}`);
@@ -263,9 +264,9 @@ function initializeVideoCarousel(profileType) {
     console.log('Video container found:', videoContainer);
     
     // Clear any existing carousel interval
-    if (videoCarouselInterval) {
-        clearInterval(videoCarouselInterval);
-        videoCarouselInterval = null;
+    if (window.__videoCarouselInterval) {
+        clearInterval(window.__videoCarouselInterval);
+        window.__videoCarouselInterval = null;
     }
     
     // Clear existing videos
@@ -273,7 +274,8 @@ function initializeVideoCarousel(profileType) {
     
     // List of videos for the profile type
     const videoFiles = {
-        'recruiter_profile': ['r0.mp4'],
+        // NOTE: recruiter videos available in repo are r1/r2/r3 (no r0.mp4)
+        'recruiter_profile': ['r1.mp4', 'r2.mp4', 'r3.mp4'],
         'developer_profile': ['v0.mp4', 'v1.mp4', 'v2.mp4'],
         'adventurer_profile': ['suits.mp4', 'bb.mp4'],
         'stalker_profile': ['s0.mp4'] // Add videos when available

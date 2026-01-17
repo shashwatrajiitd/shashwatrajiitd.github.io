@@ -96,6 +96,8 @@ function toggleProfileDropdown(event) {
 }
 
 // Make switchProfile globally accessible
+// Do NOT override the global router implementation from `script.js`.
+if (typeof window.switchProfile !== 'function') {
 window.switchProfile = async function(profileName) {
     console.log(`Switching to profile: ${profileName}`);
     
@@ -152,6 +154,7 @@ window.switchProfile = async function(profileName) {
         console.error('Navigation functions not available. HistoryManager or loadProfilePage required.');
     }
 };
+}
 
 function updateCurrentProfileImage(profileName) {
     const profileImages = {
@@ -291,7 +294,8 @@ function initializeRecruiterPage() {
 }
 
 // Initialize Netflix-style video carousel
-let videoCarouselInterval = null; // Store interval to prevent multiple instances
+// Use a window-scoped key to avoid top-level `let` collisions across profile scripts.
+window.__videoCarouselInterval = window.__videoCarouselInterval || null;
 
 function initializeVideoCarousel(profileType) {
     console.log(`Initializing video carousel for: ${profileType}`);
@@ -329,9 +333,9 @@ function initializeVideoCarousel(profileType) {
     console.log('Video container found:', videoContainer);
     
     // Clear any existing carousel interval
-    if (videoCarouselInterval) {
-        clearInterval(videoCarouselInterval);
-        videoCarouselInterval = null;
+    if (window.__videoCarouselInterval) {
+        clearInterval(window.__videoCarouselInterval);
+        window.__videoCarouselInterval = null;
     }
     
     // Clear existing videos
