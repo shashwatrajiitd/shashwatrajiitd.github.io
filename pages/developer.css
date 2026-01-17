@@ -614,28 +614,415 @@ button.btn-primary-cta {
     border-radius: 2px;
 }
 
-/* About Section */
-.about-content {
+/* Code Editor About Section */
+.code-editor-container {
     width: 100%;
-    margin: 0;
-    text-align: center;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
 }
 
-.about-text {
-    font-size: 1.2rem;
-    line-height: 1.8;
-    color: var(--netflix-light-grey);
-    font-style: italic;
+.code-editor {
+    background: #1e1e1e;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.code-editor-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: #252526;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.code-editor-title {
+    color: #cccccc;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.code-editor-controls {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.code-control-btn {
+    background: transparent;
+    border: none;
+    color: #cccccc;
+    cursor: pointer;
+    padding: 0.4rem 0.6rem;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-size: 0.85rem;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.code-control-btn:hover {
     background: rgba(255, 255, 255, 0.1);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 16px;
-    padding: 2rem 2.5rem;
-    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-    display: inline-block;
-    width: 100%;
-    box-sizing: border-box;
+    color: #ffffff;
+}
+
+.code-control-btn.play-btn:hover {
+    background: rgba(46, 160, 67, 0.2);
+    color: #4ec9b0;
+}
+
+.code-control-btn.copy-btn:hover {
+    background: rgba(0, 122, 204, 0.2);
+    color: #4ec9b0;
+}
+
+.code-control-btn.kill-btn:hover {
+    background: rgba(229, 9, 20, 0.2);
+    color: #f48771;
+}
+
+.code-control-btn i {
+    font-size: 0.85rem;
+}
+
+.copy-text {
+    font-size: 0.85rem;
+}
+
+.code-content-wrapper {
+    position: relative;
+    overflow: hidden;
+    max-height: 300px;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.code-editor.expanded .code-content-wrapper {
+    max-height: 2000px;
+}
+
+.code-content-wrapper::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 80px;
+    background: linear-gradient(to bottom, rgba(30, 30, 30, 0), rgba(30, 30, 30, 0.7), #1e1e1e);
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.code-editor.expanded .code-content-wrapper::after {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.code-content {
+    margin: 0;
+    padding: 1.5rem;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: pre;
+    tab-size: 4;
+}
+
+.code-content::-webkit-scrollbar {
+    height: 8px;
+}
+
+.code-content::-webkit-scrollbar-track {
+    background: #1e1e1e;
+}
+
+.code-content::-webkit-scrollbar-thumb {
+    background: #424242;
+    border-radius: 4px;
+}
+
+.code-content::-webkit-scrollbar-thumb:hover {
+    background: #4e4e4e;
+}
+
+.code-content code {
+    font-family: inherit;
+    font-size: inherit;
+}
+
+/* Python Syntax Highlighting - VS Code Dark+ Theme */
+.code-content {
+    color: #d4d4d4; /* Default text color */
+    background: #1e1e1e; /* VS Code dark background */
+}
+
+.code-content code {
+    color: inherit;
+    background: transparent;
+}
+
+/* VS Code Dark+ Theme Colors - More specific selectors to ensure they apply */
+.code-content .keyword,
+.code-content code .keyword,
+#code-content .keyword,
+#code-content code .keyword {
+    color: #569cd6 !important; /* Blue - keywords like class, def, return, if, etc. */
+}
+
+.code-content .string,
+.code-content code .string,
+#code-content .string,
+#code-content code .string {
+    color: #CE9178 !important; /* VS Code Dark+ strings */
+}
+
+/* Extra specificity (some browsers/extensions inject code styles) */
+.code-content span.string,
+.code-content code span.string,
+#code-content span.string,
+#code-content code span.string {
+    color: #CE9178 !important;
+}
+
+.code-content .comment,
+.code-content code .comment,
+#code-content .comment,
+#code-content code .comment {
+    color: #6a9955 !important; /* Green - comments */
+    font-style: italic;
+}
+
+.code-content .function,
+.code-content code .function,
+#code-content .function,
+#code-content code .function {
+    color: #dcdcaa !important; /* Yellow - function names */
+}
+
+.code-content .decorator,
+.code-content code .decorator,
+#code-content .decorator,
+#code-content code .decorator {
+    color: #dcdcaa !important; /* Yellow - decorators like @property */
+}
+
+.code-content .type,
+.code-content code .type,
+#code-content .type,
+#code-content code .type {
+    color: #4ec9b0 !important; /* Cyan - type hints like str, list, etc. */
+}
+
+.code-content .number,
+.code-content code .number,
+#code-content .number,
+#code-content code .number {
+    color: #b5cea8 !important; /* Light green - numbers */
+}
+
+.code-content .self,
+.code-content code .self,
+#code-content .self,
+#code-content code .self {
+    color: #569cd6 !important; /* Blue - self keyword */
+}
+
+.code-content .operator {
+    color: #d4d4d4; /* White - operators */
+}
+
+.code-content .variable {
+    color: #9cdcfe; /* Light blue - variables */
+}
+
+.code-content .self {
+    color: #569cd6; /* Blue - self keyword */
+}
+
+/* Terminal Output */
+.terminal-output {
+    margin-top: 1rem;
+    background: #0d1117;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    animation: slideDown 0.4s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+        max-height: 0;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+        max-height: 1000px;
+    }
+}
+
+.terminal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 1rem;
+    background: #161b22;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.terminal-title {
+    color: #8b949e;
+    font-size: 0.9rem;
+    font-weight: 600;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-status {
+    color: #4ec9b0;
+    font-size: 0.8rem;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+}
+
+.terminal-status.running::after {
+    content: ' ▋';
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+.terminal-content {
+    padding: 1.5rem;
+    color: #c9d1d9;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9rem;
+    line-height: 1.8;
+    min-height: 100px;
+    max-height: 500px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+.terminal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+.terminal-content::-webkit-scrollbar-track {
+    background: #161b22;
+}
+
+.terminal-content::-webkit-scrollbar-thumb {
+    background: #30363d;
+    border-radius: 4px;
+}
+
+.terminal-content::-webkit-scrollbar-thumb:hover {
+    background: #484f58;
+}
+
+.terminal-line {
+    opacity: 0;
+    animation: fadeInLine 0.3s ease forwards;
+}
+
+@keyframes fadeInLine {
+    to {
+        opacity: 1;
+    }
+}
+
+.terminal-prompt {
+    color: #58a6ff;
+}
+
+.terminal-output-text {
+    color: #c9d1d9;
+}
+
+/* Copy Toast Notification */
+.copy-toast {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background: rgba(0, 0, 0, 0.9);
+    color: #ffffff;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+    z-index: 10000;
+    animation: toastSlideIn 0.3s ease, toastSlideOut 0.3s ease 2.7s forwards;
+    font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+    font-size: 0.9rem;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+@keyframes toastSlideIn {
+    from {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+@keyframes toastSlideOut {
+    from {
+        transform: translateX(0);
+        opacity: 1;
+    }
+    to {
+        transform: translateX(400px);
+        opacity: 0;
+    }
+}
+
+/* Responsive Design for Code Editor */
+@media screen and (max-width: 768px) {
+    .code-content {
+        font-size: 0.8rem;
+        padding: 1rem;
+    }
+    
+    .code-editor-header {
+        padding: 0.6rem 0.8rem;
+    }
+    
+    .code-control-btn {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.75rem;
+    }
+    
+    .copy-text {
+        display: none;
+    }
+    
+    .terminal-content {
+        font-size: 0.8rem;
+        padding: 1rem;
+    }
+    
+    .code-content-wrapper {
+        max-height: 250px;
+    }
 }
 
 /* Experience Cards */

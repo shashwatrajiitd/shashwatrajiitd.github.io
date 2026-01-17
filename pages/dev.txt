@@ -1,0 +1,82 @@
+class ShashwatRaj:
+    """
+    Autonomous GenAI Systems Engineer & Multi-Agent Orchestrator
+    Turning business constraints into scalable, production-grade AI magic.
+    Currently running live at Purplle.com — Mumbai, IN
+    """
+
+    def __init__(self):
+        self.handle          = "Shaz"                     # or Shashwat Raj
+        self.role            = "Software Developer"
+        self.email           = "shashwatrajiitd@gmail.com"
+        self.github          = "shashwatrajiitd"
+        self.portfolio       = "shashwatrajiitd.github.io"
+
+        self.education = {
+            "degree": "B.Tech Mathematics & Computing",
+            "institute": "IIT Delhi",
+            "period": "Oct 2021 – May 2025",
+            "cgpa": "7.0 / 10"
+        }
+
+        self.current_stack = {
+            "core":          ["Python", "SQL", "C/C++", "TypeScript"],
+            "cloud":         ["AWS", "GCP"],
+            "genai_ml":      [
+                "LLMs / VLMs", "Stable Diffusion", "LoRA Fine-Tuning",
+                "Google Gemini", "OpenAI", "RAG", "Agentic Systems"
+            ],
+            "ops_infra":     ["MLOps", "Microservices", "Docker", "Kafka", "Git"],
+            "paradigms":     ["OOP", "API Design", "Distributed Systems"]
+        }
+
+    @property
+    def current_mission(self) -> str:
+        """Primary thread – GenAI Creative Automation Platform @ Purplle"""
+        return (
+            "Architect & deploy autonomous multi-agent swarm:\n"
+            "• Ideation Agents       → campaign concepts & directions\n"
+            "• Generation Agents     → high-fidelity statics via LLM/VLM + diffusion\n"
+            "• Moderation Agents     → vision-based brand compliance & ranking\n"
+            "Scaling to 11+ app surfaces • building Creative Generation Service\n"
+            "Roadmap: personalization, PDP automation, Master Content Bank (MCB)"
+        )
+
+    def previous_threads(self) -> list:
+        """Notable commits / internships"""
+        return [
+            {
+                "repo": "Samsung R&D – Ads Revenue Platform",
+                "duration": "May – Jul 2024",
+                "summary": (
+                    "Real-time forecasting + anomaly detection pipeline\n"
+                    "Hybrid classical regression + PyTorch transformer time-series\n"
+                    "Residual-based anomaly flagging on Kafka streams\n"
+                    "Boosted observability under high-throughput loads"
+                )
+            }
+        ]
+
+    @property
+    def unlocked_achievements(self) -> list[str]:
+        return [
+            "JEE Advanced & Mains 2021 – 99.89 percentile",
+            "NTSE Scholar 2019 – National Talent Search",
+            "Samsung SWC – Advanced Software Competency (1st attempt)",
+            "Regional Mathematical Olympiad – Merit Certificate ×2"
+        ]
+
+    def greet(self) -> str:
+        return (
+            f"Hey fellow dev! I'm {self.handle}, a {self.role} from IIT Delhi.\n"
+            f"Currently orchestrating multi-agent GenAI pipelines in production.\n"
+            f"Stack: {', '.join(self.current_stack['genai_ml'][:6])} + MLOps & microservices.\n"
+            f"Previously debugged revenue anomalies with PyTorch transformers @ Samsung R&D.\n"
+            f"Always down to fork repos, review PRs, or pair on scalable AI infra."
+        )
+
+
+# Render introduction when the module is “run”
+if __name__ == "__main__":
+    me = ShashwatRaj()
+    print(me.greet())

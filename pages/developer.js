@@ -225,6 +225,11 @@ function initializeDeveloperPage() {
         console.log('Initializing video carousel for developer profile');
         initializeVideoCarousel('developer_profile');
     }, 300);
+    
+    // Initialize code editor
+    setTimeout(() => {
+        initializeCodeEditor();
+    }, 400);
 }
 
 // Initialize Netflix-style video carousel
@@ -484,4 +489,422 @@ function toggleExperienceCard(card) {
             card.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
         }, 100);
     }
+}
+
+// ============================================
+// Code Editor About Section Functionality
+// ============================================
+
+// Terminal output script
+const TERMINAL_OUTPUT = `Hey fellow dev! I'm Shaz, a Software Developer from IIT Delhi.
+Currently orchestrating multi-agent GenAI pipelines in production.
+Stack: LLMs / VLMs, Stable Diffusion, LoRA Fine-Tuning, Google Gemini, OpenAI, RAG + MLOps & microservices.
+Previously debugged revenue anomalies with PyTorch transformers @ Samsung R&D.
+Always down to fork repos, review PRs, or pair on scalable AI infra.`;
+
+// State management
+let codeEditorState = {
+    expanded: false,
+    running: false,
+    terminalVisible: false
+};
+
+// Initialize code editor
+function initializeCodeEditor() {
+    const codeEditor = document.getElementById('code-editor');
+    const expandBtn = document.getElementById('expand-btn');
+    const playBtn = document.getElementById('play-btn');
+    const copyBtn = document.getElementById('copy-btn');
+    const killBtn = document.getElementById('kill-btn');
+    const codeContent = document.getElementById('code-content');
+    const terminalOutput = document.getElementById('terminal-output');
+    
+    if (!codeEditor) return;
+    
+    // Add syntax highlighting - call after DOM is ready
+    if (codeContent) {
+        // Try immediately
+        applySyntaxHighlighting();
+        // Also try after a delay to ensure everything is loaded
+        setTimeout(() => {
+            applySyntaxHighlighting();
+        }, 200);
+    }
+    
+    // Expand/Collapse button
+    if (expandBtn) {
+        expandBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            toggleCodeEditor();
+        });
+    }
+    
+    // Click on code editor to expand
+    if (codeEditor) {
+        codeEditor.addEventListener('click', (e) => {
+            // Don't expand if clicking on controls
+            if (e.target.closest('.code-editor-controls')) return;
+            if (!codeEditorState.expanded) {
+                toggleCodeEditor();
+            }
+        });
+    }
+    
+    // Play button
+    if (playBtn) {
+        playBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (!codeEditorState.running) {
+                runCode();
+            }
+        });
+    }
+    
+    // Copy button
+    if (copyBtn) {
+        copyBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            copyCode();
+        });
+    }
+    
+    // Kill button
+    if (killBtn) {
+        killBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            killExecution();
+        });
+    }
+}
+
+// Toggle expand/collapse
+function toggleCodeEditor() {
+    const codeEditor = document.getElementById('code-editor');
+    if (!codeEditor) return;
+    
+    codeEditorState.expanded = !codeEditorState.expanded;
+    codeEditor.classList.toggle('expanded', codeEditorState.expanded);
+    
+    // Update expand button icon
+    const expandBtn = document.getElementById('expand-btn');
+    if (expandBtn) {
+        const icon = expandBtn.querySelector('i');
+        if (icon) {
+            if (codeEditorState.expanded) {
+                icon.className = 'fas fa-compress';
+                expandBtn.title = 'Collapse';
+            } else {
+                icon.className = 'fas fa-bars';
+                expandBtn.title = 'Expand';
+            }
+        }
+    }
+}
+
+// Run code (show terminal output)
+function runCode() {
+    if (codeEditorState.running) return;
+    
+    codeEditorState.running = true;
+    codeEditorState.terminalVisible = true;
+    
+    const playBtn = document.getElementById('play-btn');
+    const killBtn = document.getElementById('kill-btn');
+    const terminalOutput = document.getElementById('terminal-output');
+    const terminalContent = document.getElementById('terminal-content');
+    const terminalStatus = document.getElementById('terminal-status');
+    
+    // Show kill button, hide play button
+    if (playBtn) playBtn.style.display = 'none';
+    if (killBtn) killBtn.style.display = 'flex';
+    
+    // Show terminal
+    if (terminalOutput) {
+        terminalOutput.style.display = 'block';
+    }
+    
+    // Update status
+    if (terminalStatus) {
+        terminalStatus.textContent = 'Running...';
+        terminalStatus.className = 'terminal-status running';
+    }
+    
+    // Clear previous output
+    if (terminalContent) {
+        terminalContent.innerHTML = '';
+    }
+    
+    // Animate terminal output line by line
+    animateTerminalOutput();
+}
+
+// Animate terminal output
+function animateTerminalOutput() {
+    const terminalContent = document.getElementById('terminal-content');
+    if (!terminalContent) return;
+    
+    const lines = TERMINAL_OUTPUT.split('\n');
+    let currentLine = 0;
+    
+    function addNextLine() {
+        if (currentLine >= lines.length) {
+            // Finished
+            const terminalStatus = document.getElementById('terminal-status');
+            if (terminalStatus) {
+                terminalStatus.textContent = 'Completed';
+                terminalStatus.className = 'terminal-status';
+            }
+            return;
+        }
+        
+        const line = lines[currentLine];
+        const lineElement = document.createElement('div');
+        lineElement.className = 'terminal-line';
+        lineElement.textContent = line;
+        terminalContent.appendChild(lineElement);
+        
+        currentLine++;
+        
+        // Add delay between lines (faster for better UX)
+        setTimeout(addNextLine, 150);
+    }
+    
+    // Start animation
+    addNextLine();
+}
+
+// Kill execution
+function killExecution() {
+    codeEditorState.running = false;
+    codeEditorState.terminalVisible = false;
+    
+    const playBtn = document.getElementById('play-btn');
+    const killBtn = document.getElementById('kill-btn');
+    const terminalOutput = document.getElementById('terminal-output');
+    const terminalStatus = document.getElementById('terminal-status');
+    
+    // Hide kill button, show play button
+    if (playBtn) playBtn.style.display = 'flex';
+    if (killBtn) killBtn.style.display = 'none';
+    
+    // Hide terminal
+    if (terminalOutput) {
+        terminalOutput.style.display = 'none';
+    }
+    
+    // Reset status
+    if (terminalStatus) {
+        terminalStatus.textContent = '';
+        terminalStatus.className = 'terminal-status';
+    }
+    
+    // Clear terminal content
+    const terminalContent = document.getElementById('terminal-content');
+    if (terminalContent) {
+        terminalContent.innerHTML = '';
+    }
+}
+
+// Copy code to clipboard
+function copyCode() {
+    const codeContent = document.getElementById('code-content');
+    if (!codeContent) return;
+    
+    // Get the full code text (without HTML tags)
+    const codeText = codeContent.textContent || codeContent.innerText;
+    
+    // Copy to clipboard
+    navigator.clipboard.writeText(codeText).then(() => {
+        showCopyToast();
+    }).catch(err => {
+        console.error('Failed to copy code:', err);
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = codeText;
+        textArea.style.position = 'fixed';
+        textArea.style.opacity = '0';
+        document.body.appendChild(textArea);
+        textArea.select();
+        try {
+            document.execCommand('copy');
+            showCopyToast();
+        } catch (e) {
+            console.error('Fallback copy failed:', e);
+        }
+        document.body.removeChild(textArea);
+    });
+}
+
+// Show copy toast notification
+function showCopyToast() {
+    // Remove existing toast if any
+    const existingToast = document.querySelector('.copy-toast');
+    if (existingToast) {
+        existingToast.remove();
+    }
+    
+    const toast = document.createElement('div');
+    toast.className = 'copy-toast';
+    toast.textContent = '✓ Code copied to clipboard';
+    document.body.appendChild(toast);
+    
+    // Remove after animation
+    setTimeout(() => {
+        if (toast.parentNode) {
+            toast.parentNode.removeChild(toast);
+        }
+    }, 3000);
+}
+
+// Apply VS Code-style Python syntax highlighting
+function applySyntaxHighlighting() {
+    const codeContent = document.getElementById('code-content');
+    if (!codeContent) {
+        console.warn('code-content element not found');
+        return;
+    }
+    
+    // Find the code element inside the pre
+    let codeElement = codeContent.querySelector('code');
+    if (!codeElement) {
+        // If no code element, create one
+        const code = codeContent.textContent || codeContent.innerText;
+        codeElement = document.createElement('code');
+        codeElement.className = 'language-python';
+        codeElement.textContent = code;
+        codeContent.innerHTML = '';
+        codeContent.appendChild(codeElement);
+    }
+    
+    // Get raw text content first (this removes any existing HTML)
+    let code = codeElement.textContent || codeElement.innerText;
+    
+    if (!code || code.trim().length === 0) {
+        console.warn('No code content found');
+        return;
+    }
+    
+    console.log('Applying syntax highlighting to code of length:', code.length);
+    
+    // First, escape the entire code to make it HTML-safe.
+    // Important: we MUST also escape quotes so the browser never treats them as markup.
+    const escapeHtml = (text) =>
+        text
+            .replace(/&/g, '&amp;') // must be first
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
+    
+    const originalCode = code;
+    code = escapeHtml(code);
+    
+    // Now all quotes are &quot;, < is &lt;, > is &gt;, etc.
+    // We need to adjust our regex patterns to work with escaped content
+    
+    // Process in order to avoid conflicts
+    // Step 1: Comments (must come first) - # doesn't get escaped
+    code = code.replace(/(#.*$)/gm, '<span class="comment">$1</span>');
+    
+    // Step 2: Strings - handle triple quotes first (docstrings)
+    // Match &quot;&quot;&quot;...&quot;&quot;&quot; (escaped triple double quotes) - non-greedy
+    code = code.replace(/(&quot;&quot;&quot;[\s\S]*?&quot;&quot;&quot;)/g, '<span class="string">$1</span>');
+    // Match &#39;&#39;&#39;...&#39;&#39;&#39; (escaped triple single quotes) - non-greedy
+    code = code.replace(/(&#39;&#39;&#39;[\s\S]*?&#39;&#39;&#39;)/g, '<span class="string">$1</span>');
+    
+    // Step 3: F-strings - match f&quot;...&quot; or f&#39;...&#39;
+    // Match content until we find the closing quote (handling entities)
+    code = code.replace(/(f&quot;(?:(?!&quot;)[\s\S])*?&quot;)/g, '<span class="string">$1</span>');
+    code = code.replace(/(f&#39;(?:(?!&#39;)[\s\S])*?&#39;)/g, '<span class="string">$1</span>');
+    
+    // Step 4: Regular strings - match &quot;...&quot; or &#39;...&#39;
+    // Match content until we find the closing quote (handling entities)
+    code = code.replace(/(&quot;(?:(?!&quot;)[\s\S])*?&quot;)/g, '<span class="string">$1</span>');
+    code = code.replace(/(&#39;(?:(?!&#39;)[\s\S])*?&#39;)/g, '<span class="string">$1</span>');
+    
+    // Step 5: Decorators
+    code = code.replace(/(@[a-zA-Z_][a-zA-Z0-9_]*)/g, '<span class="decorator">$1</span>');
+    
+    // Step 6: Type hints with arrow
+    code = code.replace(/(-&gt;)\s*([a-zA-Z_][a-zA-Z0-9_]*)/g, '<span class="keyword">$1</span> <span class="type">$2</span>');
+    
+    // Step 7: Type hints in brackets
+    code = code.replace(/\b(list|dict|tuple|set|str|int|float|bool|Any|Optional|Union)\[([^\]]+)\]/g, '<span class="type">$1</span>[$2]');
+    
+    // Step 8: Standalone type hints
+    code = code.replace(/\b(list|dict|tuple|set|str|int|float|bool|Any|Optional|Union)\b(?![\[\(])/g, '<span class="type">$1</span>');
+    
+    // Step 9: Python keywords
+    const keywords = ['__init__', '__main__', '__name__', 'class', 'def', 'return', 'if', 'elif', 'else', 'for', 'while', 'try', 'except', 'finally', 'with', 'as', 'import', 'from', 'pass', 'break', 'continue', 'yield', 'lambda', 'and', 'or', 'not', 'in', 'is', 'None', 'True', 'False'];
+    keywords.forEach(keyword => {
+        const escapedKeyword = keyword.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+        const regex = new RegExp(`\\b(${escapedKeyword})\\b`, 'g');
+        code = code.replace(regex, (match, p1, offset, string) => {
+            // Check if we're inside a span by looking backwards
+            const before = string.substring(0, offset);
+            const lastOpenSpan = before.lastIndexOf('<span');
+            const lastCloseSpan = before.lastIndexOf('</span>');
+            if (lastOpenSpan > lastCloseSpan) {
+                return match; // Inside a span, don't replace
+            }
+            return `<span class="keyword">${match}</span>`;
+        });
+    });
+    
+    // Step 10: self keyword
+    code = code.replace(/\b(self)\b/g, (match, p1, offset, string) => {
+        const before = string.substring(0, offset);
+        const lastOpenSpan = before.lastIndexOf('<span');
+        const lastCloseSpan = before.lastIndexOf('</span>');
+        if (lastOpenSpan > lastCloseSpan) {
+            return match;
+        }
+        return '<span class="self">self</span>';
+    });
+    
+    // Step 11: Numbers
+    code = code.replace(/\b(\d+\.\d+|\d+)\b/g, (match, p1, offset, string) => {
+        const before = string.substring(0, offset);
+        const lastOpenSpan = before.lastIndexOf('<span');
+        const lastCloseSpan = before.lastIndexOf('</span>');
+        if (lastOpenSpan > lastCloseSpan) {
+            return match;
+        }
+        return `<span class="number">${match}</span>`;
+    });
+    
+    // Step 12: Function calls and definitions
+    code = code.replace(/\b([a-zA-Z_][a-zA-Z0-9_]*)\s*(?=\()/g, (match, funcName, offset, string) => {
+        // Skip keywords
+        if (keywords.includes(funcName) || funcName === 'self') {
+            return match;
+        }
+        // Check if inside a span
+        const before = string.substring(0, offset);
+        const lastOpenSpan = before.lastIndexOf('<span');
+        const lastCloseSpan = before.lastIndexOf('</span>');
+        if (lastOpenSpan > lastCloseSpan) {
+            return match;
+        }
+        return `<span class="function">${funcName}</span>`;
+    });
+    
+    // Step 13: Class names after 'class' keyword
+    // Note: class is escaped as-is, but we need to match the escaped version
+    code = code.replace(/<span class="keyword">class<\/span>\s+([a-zA-Z_][a-zA-Z0-9_]*)\s*:/g, '<span class="keyword">class</span> <span class="function">$1</span>:');
+    
+    // The code is now properly escaped and highlighted
+    // Update the innerHTML of the code element
+    codeElement.innerHTML = code;
+    
+    console.log('Syntax highlighting applied successfully');
+}
+
+// Also try to initialize code editor if DOM is already ready (fallback)
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(initializeCodeEditor, 300);
+    });
+} else {
+    setTimeout(initializeCodeEditor, 300);
 }

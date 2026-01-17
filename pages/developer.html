@@ -80,11 +80,121 @@
 
         <!-- About Section -->
         <section id="developer-about" class="developer-section">
-            <h2 class="section-title">ABOUT</h2>
+            <h2 class="section-title">ABOUT / DEVELOPER PROFILE</h2>
             <div class="section-divider"></div>
-            <div class="about-content">
-                <p class="about-text">
-                    Hey fellow dev! I'm Shashwat Raj, a Mathematics & Computing grad from IIT Delhi, building scalable GenAI at Purplle. Engineered an autonomous multi-agent system using LLMs, VLMs, and Stable Diffusion with LoRA fine-tuning, ideation agents for concepts, generation pipelines for creatives, and vision evaluators for moderation. Slashed production time 10-15x and costs 95%. At Samsung R&D internship, implemented PyTorch transformer-based forecasting and Kafka-integrated anomaly detection, boosting accuracy 5%. Stack: Python, AWS/GCP, MLOps, RAG, microservices. Let's connect and collab on AI infra! 
+            <div class="code-editor-container">
+                <div class="code-editor" id="code-editor">
+                    <div class="code-editor-header">
+                        <span class="code-editor-title">Python</span>
+                        <div class="code-editor-controls">
+                            <button class="code-control-btn kill-btn" id="kill-btn" title="Kill / Stop Execution" style="display: none;">
+                                <i class="fas fa-times"></i>
+                            </button>
+                            <button class="code-control-btn expand-btn" id="expand-btn" title="Expand / Collapse">
+                                <i class="fas fa-bars"></i>
+                            </button>
+                            <button class="code-control-btn play-btn" id="play-btn" title="Run Code">
+                                <i class="fas fa-play"></i>
+                            </button>
+                            <button class="code-control-btn copy-btn" id="copy-btn" title="Copy Code">
+                                <i class="far fa-copy"></i> <span class="copy-text">Copy</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="code-content-wrapper">
+                        <pre class="code-content" id="code-content"><code class="language-python">class ShashwatRaj:
+    """
+    Autonomous GenAI Systems Engineer & Multi-Agent Orchestrator
+    Turning business constraints into scalable, production-grade AI magic.
+    Currently running live at Purplle.com — Mumbai, IN
+    """
+
+    def __init__(self):
+        self.handle          = "Shaz"                     # or Shashwat Raj
+        self.role            = "Software Developer"
+        self.email           = "shashwatrajiitd@gmail.com"
+        self.github          = "shashwatrajiitd"
+        self.portfolio       = "shashwatrajiitd.github.io"
+
+        self.education = {
+            "degree": "B.Tech Mathematics & Computing",
+            "institute": "IIT Delhi",
+            "period": "Oct 2021 – May 2025",
+            "cgpa": "7.0 / 10"
+        }
+
+        self.current_stack = {
+            "core":          ["Python", "SQL", "C/C++", "TypeScript"],
+            "cloud":         ["AWS", "GCP"],
+            "genai_ml":      [
+                "LLMs / VLMs", "Stable Diffusion", "LoRA Fine-Tuning",
+                "Google Gemini", "OpenAI", "RAG", "Agentic Systems"
+            ],
+            "ops_infra":     ["MLOps", "Microservices", "Docker", "Kafka", "Git"],
+            "paradigms":     ["OOP", "API Design", "Distributed Systems"]
+        }
+
+    @property
+    def current_mission(self) -> str:
+        """Primary thread – GenAI Creative Automation Platform @ Purplle"""
+        return (
+            "Architect & deploy autonomous multi-agent swarm:\n"
+            "• Ideation Agents       → campaign concepts & directions\n"
+            "• Generation Agents     → high-fidelity statics via LLM/VLM + diffusion\n"
+            "• Moderation Agents     → vision-based brand compliance & ranking\n"
+            "Scaling to 11+ app surfaces • building Creative Generation Service\n"
+            "Roadmap: personalization, PDP automation, Master Content Bank (MCB)"
+        )
+
+    def previous_threads(self) -> list:
+        """Notable commits / internships"""
+        return [
+            {
+                "repo": "Samsung R&D – Ads Revenue Platform",
+                "duration": "May – Jul 2024",
+                "summary": (
+                    "Real-time forecasting + anomaly detection pipeline\n"
+                    "Hybrid classical regression + PyTorch transformer time-series\n"
+                    "Residual-based anomaly flagging on Kafka streams\n"
+                    "Boosted observability under high-throughput loads"
+                )
+            }
+        ]
+
+    @property
+    def unlocked_achievements(self) -> list[str]:
+        return [
+            "JEE Advanced & Mains 2021 – 99.89 percentile",
+            "NTSE Scholar 2019 – National Talent Search",
+            "Samsung SWC – Advanced Software Competency (1st attempt)",
+            "Regional Mathematical Olympiad – Merit Certificate ×2"
+        ]
+
+    def greet(self) -> str:
+        return (
+            f"Hey fellow dev! I'm {self.handle}, a {self.role} from IIT Delhi.\n"
+            f"Currently orchestrating multi-agent GenAI pipelines in production.\n"
+            f"Stack: {', '.join(self.current_stack['genai_ml'][:6])} + MLOps & microservices.\n"
+            f"Previously debugged revenue anomalies with PyTorch transformers @ Samsung R&D.\n"
+            f"Always down to fork repos, review PRs, or pair on scalable AI infra."
+        )
+
+
+# Render introduction when the module is "run"
+if __name__ == "__main__":
+    me = ShashwatRaj()
+    print(me.greet())</code></pre>
+                    </div>
+                </div>
+                <div class="terminal-output" id="terminal-output" style="display: none;">
+                    <div class="terminal-header">
+                        <span class="terminal-title">Terminal</span>
+                        <span class="terminal-status" id="terminal-status">Running...</span>
+                    </div>
+                    <div class="terminal-content" id="terminal-content">
+                        <!-- Terminal output will be populated here -->
+                    </div>
+                </div>
             </div>
         </section>
 
