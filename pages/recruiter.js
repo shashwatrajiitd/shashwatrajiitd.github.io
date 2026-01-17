@@ -234,6 +234,14 @@ function initializeRecruiterPage() {
     // Initialize profile selector
     initializeProfileSelector();
     
+    // Initialize skill cards with hover/click expansion
+    // Use requestAnimationFrame to ensure DOM is ready
+    requestAnimationFrame(() => {
+        setTimeout(() => {
+            initializeSkillCards();
+        }, 100);
+    });
+    
     // Create arched text effect for logo (only if logo contains text, not an image)
     const logo = document.querySelector('#recruiter-navbar .logo');
     if (logo) {
@@ -331,7 +339,7 @@ function initializeVideoCarousel(profileType) {
     
     // List of videos for the profile type
     const videoFiles = {
-        'recruiter_profile': ["r0.mp4"],
+        'recruiter_profile': ["r1.mp4", "r2.mp4", "r3.mp4"],
         'developer_profile': ['v0.mp4', 'v1.mp4', 'v2.mp4'],
         'adventurer_profile': ['suits.mp4', 'bb.mp4'],
         'stalker_profile': ['s0.mp4'] // Add videos when available
@@ -511,3 +519,220 @@ function toggleExperienceCard(card) {
         }, 100);
     }
 }
+
+// Skill Card Hover/Click Expansion
+function initializeSkillCards() {
+    const skillCards = document.querySelectorAll('.skill-card');
+    console.log('Found skill cards:', skillCards.length);
+    
+    if (skillCards.length === 0) {
+        console.warn('No skill cards found!');
+        return;
+    }
+    
+    let hoverTimeout = null;
+    let currentExpanded = null;
+
+    function populateExpandedContent(card) {
+        const skillName = card.getAttribute('data-skill');
+        const tagsJson = card.getAttribute('data-tags');
+        const linesJson = card.getAttribute('data-lines');
+        const gradient = card.getAttribute('data-gradient');
+
+        const expanded = card.querySelector('.skill-expanded');
+        if (!expanded) return;
+
+        // Update title
+        const title = expanded.querySelector('.expanded-title');
+        if (title) title.textContent = skillName;
+
+        // Update image gradient and icon
+        const expandedImage = expanded.querySelector('.expanded-image');
+        if (expandedImage && gradient) {
+            // Set gradient background
+            expandedImage.style.background = `linear-gradient(${gradient})`;
+            expandedImage.style.backgroundSize = 'cover';
+            expandedImage.style.backgroundPosition = 'center';
+            
+            // Get the icon from the original card
+            const originalIcon = card.querySelector('.card-image i');
+            if (originalIcon) {
+                const iconClass = originalIcon.className;
+                // Check if icon already exists in expanded image
+                let expandedIcon = expandedImage.querySelector('i');
+                if (!expandedIcon) {
+                    // Insert icon BEFORE overlay so it's visible
+                    const overlay = expandedImage.querySelector('.expanded-overlay');
+                    expandedIcon = document.createElement('i');
+                    if (overlay) {
+                        expandedImage.insertBefore(expandedIcon, overlay);
+                    } else {
+                        expandedImage.appendChild(expandedIcon);
+                    }
+                }
+                expandedIcon.className = iconClass;
+                expandedIcon.style.fontSize = '7rem'; // Match CSS
+                expandedIcon.style.color = '#FFFFFF';
+                expandedIcon.style.zIndex = '3';
+                expandedIcon.style.textShadow = '0 4px 12px rgba(0, 0, 0, 0.6), 0 0 20px rgba(255, 255, 255, 0.1)';
+                expandedIcon.style.position = 'relative';
+                expandedIcon.style.display = 'block';
+                expandedIcon.style.opacity = '1';
+                expandedIcon.style.visibility = 'visible';
+                expandedIcon.style.margin = '0 auto';
+                expandedIcon.style.filter = 'drop-shadow(0 0 8px rgba(255, 255, 255, 0.2))';
+                console.log('Icon added to expanded thumbnail:', iconClass);
+            } else {
+                console.warn('No icon found in original card');
+            }
+        } else {
+            console.warn('Expanded image or gradient not found');
+        }
+
+        // Populate tags
+        const tagsContainer = expanded.querySelector('.expanded-tags');
+        if (tagsContainer && tagsJson) {
+            try {
+                const tags = JSON.parse(tagsJson);
+                tagsContainer.innerHTML = '';
+                tags.forEach(tag => {
+                    const tagElement = document.createElement('span');
+                    tagElement.className = 'expanded-tag';
+                    tagElement.textContent = tag;
+                    tagsContainer.appendChild(tagElement);
+                });
+            } catch (e) {
+                console.warn('Error parsing tags:', e);
+            }
+        }
+
+        // Populate supporting lines
+        const linesContainer = expanded.querySelector('.expanded-lines');
+        if (linesContainer && linesJson) {
+            try {
+                const lines = JSON.parse(linesJson);
+                linesContainer.innerHTML = '';
+                lines.forEach(line => {
+                    const lineElement = document.createElement('div');
+                    lineElement.className = 'expanded-line';
+                    lineElement.textContent = line;
+                    linesContainer.appendChild(lineElement);
+                });
+            } catch (e) {
+                console.warn('Error parsing lines:', e);
+            }
+        }
+    }
+
+    function expandCard(card) {
+        console.log('Expanding card:', card);
+        
+        // Close any currently expanded card
+        if (currentExpanded && currentExpanded !== card) {
+            currentExpanded.classList.remove('expanded');
+        }
+
+        // Populate and expand this card
+        populateExpandedContent(card);
+        
+        // Calculate position in row for row-aware expansion
+        const row = card.closest('.skills-cards');
+        if (row) {
+            const cards = Array.from(row.querySelectorAll('.skill-card'));
+            const index = cards.indexOf(card);
+            const total = cards.length;
+            // All cards are now the same size, so no need to check for primary
+            // const isPrimary = card.classList.contains('primary');
+            
+            // Get actual card width (handles responsive sizes)
+            const cardRect = card.getBoundingClientRect();
+            const cardWidth = cardRect.width;
+            const expandedWidth = Math.round(cardWidth * 1.35);
+            const expansionOffset = (expandedWidth - cardWidth) / 2;
+            
+            // Determine expansion direction based on position
+            let leftOffset = 0;
+            if (index === 0) {
+                // First card: expand more to the right
+                leftOffset = 0;
+            } else if (index === total - 1) {
+                // Last card: expand more to the left
+                leftOffset = -expansionOffset * 2;
+            } else {
+                // Middle cards: expand symmetrically
+                leftOffset = -expansionOffset;
+            }
+            
+            // Set CSS custom property for positioning
+            card.style.setProperty('--expansion-left', `${leftOffset}px`);
+            console.log('Set expansion-left:', leftOffset, 'px');
+        }
+        
+        card.classList.add('expanded');
+        currentExpanded = card;
+        console.log('Card expanded, class added');
+    }
+
+    function collapseCard(card) {
+        card.classList.remove('expanded');
+        if (currentExpanded === card) {
+            currentExpanded = null;
+        }
+    }
+
+    skillCards.forEach(card => {
+        // Click handler
+        card.addEventListener('click', function(e) {
+            e.stopPropagation();
+            if (card.classList.contains('expanded')) {
+                collapseCard(card);
+            } else {
+                expandCard(card);
+            }
+        });
+
+        // Hover handler with 0.3s delay (Netflix-style)
+        card.addEventListener('mouseenter', function() {
+            hoverTimeout = setTimeout(() => {
+                expandCard(card);
+            }, 300);
+        });
+
+        card.addEventListener('mouseleave', function() {
+            if (hoverTimeout) {
+                clearTimeout(hoverTimeout);
+                hoverTimeout = null;
+            }
+            collapseCard(card);
+        });
+    });
+
+    // Close expanded card when clicking outside
+    document.addEventListener('click', function(e) {
+        if (currentExpanded && !currentExpanded.contains(e.target)) {
+            collapseCard(currentExpanded);
+        }
+    });
+}
+
+// Auto-initialize when DOM is ready
+(function() {
+    function init() {
+        // Check if we're on the recruiter page by looking for recruiter-specific elements
+        const recruiterNavbar = document.getElementById('recruiter-navbar');
+        const skillCards = document.querySelectorAll('.skill-card');
+        
+        if (recruiterNavbar || skillCards.length > 0) {
+            console.log('Initializing recruiter page...');
+            initializeRecruiterPage();
+        }
+    }
+    
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        // DOM already loaded
+        init();
+    }
+})();
+

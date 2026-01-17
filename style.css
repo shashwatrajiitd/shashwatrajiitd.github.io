@@ -1397,6 +1397,119 @@ button.btn-primary-cta {
     animation: pulse 2s infinite;
 }
 
+/* Core Technical Skills Section - Netflix Style */
+.core-skills-section {
+    padding: 100px 4%;
+    background: var(--netflix-black);
+    position: relative;
+}
+
+.core-skills-title {
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 3rem;
+    color: var(--netflix-white);
+    text-align: center;
+    letter-spacing: 2px;
+    opacity: 0;
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.skills-grid-netflix {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.skill-card-netflix {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    padding: 2rem 1.5rem;
+    min-height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.6s ease forwards;
+    background-image: 
+        radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.02) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.02) 0%, transparent 50%);
+}
+
+.skill-card-netflix::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0);
+    transition: background 0.3s ease;
+    pointer-events: none;
+    border-radius: 8px;
+}
+
+.skill-card-netflix:hover {
+    transform: translateY(-8px) scale(1.02);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.3);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.skill-card-netflix:hover::before {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.skill-card-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--netflix-light-grey);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 0.5rem;
+    opacity: 0.7;
+}
+
+.skill-card-name {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--netflix-white);
+    margin-bottom: 0.75rem;
+    line-height: 1.3;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.skill-card-description {
+    font-size: 0.9rem;
+    color: var(--netflix-light-grey);
+    line-height: 1.5;
+    margin-top: auto;
+}
+
+.skill-card-hover-text {
+    font-size: 0.85rem;
+    color: var(--netflix-light-grey);
+    margin-top: 0.5rem;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+}
+
+.skill-card-netflix:hover .skill-card-hover-text {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 /* Skills Section */
 .skills-container {
     max-width: 1200px;
@@ -2356,6 +2469,38 @@ button.btn-primary-cta {
     }
 }
 
+/* Core Skills Section Mobile */
+@media screen and (max-width: 768px) {
+    .core-skills-section {
+        padding: 60px 1rem;
+    }
+    
+    .core-skills-title {
+        font-size: 1.8rem;
+        margin-bottom: 2rem;
+        padding: 0 1rem;
+    }
+    
+    .skills-grid-netflix {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        padding: 0 0.5rem;
+    }
+    
+    .skill-card-netflix {
+        padding: 1.5rem 1rem;
+        min-height: 180px;
+    }
+    
+    .skill-card-name {
+        font-size: 1.2rem;
+    }
+    
+    .skill-card-description {
+        font-size: 0.85rem;
+    }
+}
+
 /* Skills Section Mobile */
 @media screen and (max-width: 768px) {
     .skills-categories {
@@ -2661,10 +2806,25 @@ button.btn-primary-cta {
     }
     
     .section-title,
-    .recruiter-section-title {
+    .recruiter-section-title,
+    .core-skills-title {
         font-size: 1.5rem;
         line-height: 1.3;
         padding: 0 0.5rem;
+    }
+    
+    .skills-grid-netflix {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .skill-card-netflix {
+        min-height: 160px;
+        padding: 1.25rem 1rem;
+    }
+    
+    .skill-card-name {
+        font-size: 1.1rem;
     }
     
     .impact-grid {
