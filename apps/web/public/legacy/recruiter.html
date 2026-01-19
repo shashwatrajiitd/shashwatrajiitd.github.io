@@ -1,0 +1,806 @@
+<!-- Top Navigation Bar -->
+<nav id="recruiter-navbar" class="recruiter-navbar">
+    <div class="logo" onclick="window.scrollTo({top: 0, behavior: 'smooth'})" style="cursor: pointer;">
+        <img src="/assets/logo.png" alt="SHASHWAT RAJ" class="navbar-logo" style="display: block; width: 202px; height: 33px; object-fit: contain;" />
+    </div>
+    <button class="mobile-menu-toggle" aria-label="Toggle menu">
+        <i class="fas fa-bars"></i>
+    </button>
+    <ul class="nav-links">
+        <li><a href="#recruiter-about">About</a></li>
+        <li><a href="#recruiter-experience">Professional</a></li>
+        <li><a href="#recruiter-skills">Skills</a></li>
+        <li><a href="#recruiter-education">Education</a></li>
+        <li><a href="#recruiter-achievements">Achievements</a></li>
+        <li><a href="#recruiter-contact">Hire Me</a></li>
+    </ul>
+    <div class="navbar-right">
+        <div class="nav-cta">
+            <button class="btn btn-resume" onclick="downloadResume()">
+                <i class="fas fa-download"></i> <span class="resume-text">Resume</span>
+            </button>
+        </div>
+        <div class="profile-selector-container">
+        <div class="profile-tile-wrapper" onclick="toggleProfileDropdown(event)">
+            <div class="profile-tile">
+                <img src="/assets/icons/recruiter.png" alt="Recruiter" class="profile-tile-img" id="current-profile-img">
+            </div>
+            <i class="fas fa-chevron-down profile-dropdown-icon"></i>
+        </div>
+        <div class="profile-dropdown" id="profile-dropdown">
+            <div class="profile-dropdown-item" data-profile="Recruiter">
+                <img src="/assets/icons/recruiter.png" alt="Recruiter" class="profile-dropdown-img">
+                <span class="profile-dropdown-name">Recruiter</span>
+            </div>
+            <div class="profile-dropdown-item" data-profile="Developer">
+                <img src="/assets/icons/developer.png" alt="Developer" class="profile-dropdown-img">
+                <span class="profile-dropdown-name">Developer</span>
+            </div>
+            <div class="profile-dropdown-item" data-profile="Stalker">
+                <img src="/assets/icons/stalker.png" alt="Stalker" class="profile-dropdown-img">
+                <span class="profile-dropdown-name">Stalker</span>
+            </div>
+            <div class="profile-dropdown-item" data-profile="Adventurer">
+                <img src="/assets/icons/adventurer.png" alt="Adventurer" class="profile-dropdown-img">
+                <span class="profile-dropdown-name">Adventurer</span>
+            </div>
+        </div>
+    </div>
+    </div>
+</nav>
+
+<!-- Main Content Area -->
+<div class="instagram-layout">
+    <main class="instagram-main">
+        <!-- Hero Section with Background Video/GIF -->
+        <section class="recruiter-hero" id="recruiter-hero">
+            <div class="hero-background">
+                <!-- Background video carousel - videos will be dynamically loaded -->
+                <div id="hero-video-container" class="hero-video-container">
+                    <!-- Videos will be inserted here by JavaScript -->
+                </div>
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="recruiter-hero-content">
+                <h1 class="recruiter-hero-title">Shashwat Raj</h1>
+                <h2 class="recruiter-hero-subtitle">Software Developer</h2>
+                <p class="hero-description">
+                    Building end-to-end scalable, production-grade GenAI systems that solve real business challenges — IIT Delhi alum focused on scalable, personalised AI at scale.
+                </p>
+                <div class="hero-cta-buttons">
+                    <button class="btn btn-primary-cta" onclick="downloadResume()">
+                        <i class="fas fa-play"></i> Resume
+                    </button>
+                    <button class="btn btn-secondary-cta" onclick="window.open('https://www.linkedin.com/in/shashwatrajiitd/', '_blank')">
+                        <i class="fas fa-info-circle"></i> LinkedIn
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="recruiter-about" class="recruiter-section">
+            <h2 class="section-title">About</h2>
+            <div class="section-divider"></div>
+            <div class="about-content">
+                <p class="about-text">
+                    I am a Software Developer at purplle specializing in scalable GenAI systems, delivering a multi-agent platform that accelerates creative production 10-15x while slashing costs by 95%. With a B.Tech in Mathematics & Computing from country's most prestigious institute IIT Delhi and hands-on experience at Samsung R&D, I build business-driven AI solutions using LLMs, VLMs, and MLOps. My track record includes top 0.1 percentile in JEE Advanced & Mains,  NTSE scholar and Mathematics Olympiads. Let's connect - I'm eager to bring innovative, high-impact tech and ideas to your team. Schedule a chat today! 
+                </p>
+            </div>
+        </section>
+
+        <!-- Continue Watching Section -->
+        <section class="continue-watching">
+            <h2 class="section-title" id="continue-watching-title">Continue Watching for Recruiter</h2>
+            <div class="watching-cards">
+                <div class="watching-card" onclick="scrollToSection('recruiter-experience')">
+                    <div class="card-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <i class="fas fa-briefcase"></i>
+                    </div>
+                    <div class="card-label">Experience</div>
+                </div>
+                <div class="watching-card" onclick="scrollToSection('recruiter-skills')">
+                    <div class="card-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <i class="fas fa-code"></i>
+                    </div>
+                    <div class="card-label">Skills</div>
+                </div>
+                <div class="watching-card" onclick="scrollToSection('recruiter-education')">
+                    <div class="card-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="card-label">Education</div>
+                </div>
+                <div class="watching-card" onclick="scrollToSection('recruiter-achievements')">
+                    <div class="card-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="card-label">Achievements</div>
+                </div>
+                <div class="watching-card" onclick="scrollToSection('recruiter-contact')">
+                    <div class="card-image" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <div class="card-label">Contact</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Work Experience Section -->
+        <section id="recruiter-experience" class="recruiter-section">
+            <h2 class="section-title">Work experience</h2>
+            <div class="section-divider"></div>
+            
+            <!-- Current Role - Purplle.com -->
+            <div class="experience-card featured" onclick="toggleExperienceCard(this)">
+                <div class="experience-header">
+                    <div class="experience-title-group">
+                        <h3 class="experience-role">Software Developer (AI Infra)</h3>
+                        <h4 class="experience-company">Purplle.com (Manash Lifestyle Pvt. Ltd.)</h4>
+                    </div>
+                    <div class="experience-meta">
+                        <span class="experience-date"><i class="far fa-calendar"></i> May 2025 - Present</span>
+                        <span class="experience-location"><i class="fas fa-map-marker-alt"></i> Mumbai, India</span>
+                    </div>
+                    <button class="expand-toggle" aria-label="Expand card" onclick="event.stopPropagation(); toggleExperienceCard(this.closest('.experience-card'))">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                <div class="experience-summary">
+                    <h4 class="project-title">GenAI Creative Automation Platform</h4>
+                    <p class="summary-text">Built and deployed an autonomous multi-agent GenAI system for large-scale creative generation across paid marketing channels (Meta, Google Ads). Achieved 10-15x faster production and ~95% cost reduction.</p>
+                </div>
+                <div class="experience-details">
+                    <div class="experience-project">
+                        <h4 class="project-title">GenAI Creative Automation Platform</h4>
+                        <div class="project-description">
+                            <p><strong>Built and deployed an autonomous multi-agent GenAI system for large-scale creative generation across paid marketing channels (Meta, Google Ads).</strong></p>
+                            
+                            <div class="project-phase">
+                                <h5>Phase 0 - Delivered system architecture:</h5>
+                                <ul class="project-features">
+                                    <li><strong>Ideation Agents:</strong> Generate high-volume campaign directions and ad concepts.</li>
+                                    <li><strong>Generation Agents:</strong> Produce high-fidelity static creatives via orchestrated LLM/VLM and diffusion pipelines.</li>
+                                    <li><strong>Moderation Agents:</strong> Rank and filter outputs for brand compliance using vision-based evaluators.</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="project-impact">
+                                <h5>Impact:</h5>
+                                <ul class="impact-list">
+                                    <li>10-15x faster creative production (1-2 weeks → < 3 hours)</li>
+                                    <li>~95% cost reduction (INR 1500-2000 → < INR 50 per asset)</li>
+                                    <li>Enabled 10-15x more creative variants per campaign</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="project-phase">
+                                <h5>Phase 1 - In execution:</h5>
+                                <ul class="project-features">
+                                    <li>Scaling the platform to power L1 app surfaces (widgets, banners, category and theme-based recommendations)</li>
+                                    <li>Building a Creative Generation Service to remove Product team creative bottlenecks</li>
+                                    <li>Designing an org-wide Master Content Bank (MCB) for structured, reusable creative assets</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="project-phase">
+                                <h5>Phase 2 & 3 - Roadmap ownership:</h5>
+                                <ul class="project-features">
+                                    <li>User-level personalization and smart shuffling of widgets using personas and behavioral signals</li>
+                                    <li>GenAI-driven PDP image and video creative automation</li>
+                                    <li>Enforcing business logic, compliance, and brand guidelines at scale</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="tech-stack">
+                            <h5>Tech Stack:</h5>
+                            <div class="tech-tags">
+                                <span class="tech-tag"><img src="/assets/icons/Tools/vertexai.png" alt="Gemini"> Gemini</span>
+                                <span class="tech-tag"><img src="/assets/icons/Tools/openai.png" alt="OpenAI"> OpenAI</span>
+                                <span class="tech-tag">Stable Diffusion (LoRA fine-tuning)</span>
+                                <span class="tech-tag">LLMs/VLMs</span>
+                                <span class="tech-tag">Vision Systems</span>
+                                <span class="tech-tag">Microservices</span>
+                                <span class="tech-tag">Orchestration</span>
+                                <span class="tech-tag">MLOps</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Samsung R&D Internship -->
+            <div class="experience-card" onclick="toggleExperienceCard(this)">
+                <div class="experience-header">
+                    <div class="experience-title-group">
+                        <h3 class="experience-role">Software Developer Intern</h3>
+                        <h4 class="experience-company">Samsung R&D</h4>
+                    </div>
+                    <div class="experience-meta">
+                        <span class="experience-date"><i class="far fa-calendar"></i> May 2024 - July 2024</span>
+                        <span class="experience-location"><i class="fas fa-map-marker-alt"></i> Bangalore, India</span>
+                    </div>
+                    <button class="expand-toggle" aria-label="Expand card" onclick="event.stopPropagation(); toggleExperienceCard(this.closest('.experience-card'))">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                <div class="experience-summary">
+                    <h4 class="project-title">Real-Time Revenue Forecasting and Anomaly Detection Platform</h4>
+                    <p class="summary-text">Developed a real-time revenue forecasting and anomaly detection pipeline for Samsung Ads, integrating classical regression models with transformer-based time-series architectures. Improved revenue prediction accuracy by 5%.</p>
+                </div>
+                <div class="experience-details">
+                    <div class="experience-project">
+                        <h4 class="project-title">Real-Time Revenue Forecasting and Anomaly Detection Platform</h4>
+                        <div class="project-description">
+                            <ul class="project-features">
+                                <li>Developed a real-time revenue forecasting and anomaly detection pipeline for Samsung Ads, integrating classical regression models with transformer-based time-series architectures</li>
+                                <li>Implemented anomaly detection logic on forecast residuals to flag revenue deviations in near real time, improving observability for downstream business systems</li>
+                            </ul>
+                        </div>
+                        <div class="project-impact">
+                            <h5>Impact:</h5>
+                            <ul class="impact-list">
+                                <li>Improved revenue prediction accuracy by 5%</li>
+                                <li>Reduced anomaly detection latency</li>
+                                <li>Supported reliable inference under high-throughput data loads</li>
+                            </ul>
+                        </div>
+                        <div class="tech-stack">
+                            <h5>Tech Stack:</h5>
+                            <div class="tech-tags">
+                                <span class="tech-tag"><img src="/assets/icons/languages/python.png" alt="Python"> Python</span>
+                                <span class="tech-tag"><img src="/assets/icons/Frameworks/pytorch.png" alt="PyTorch"> PyTorch</span>
+                                <span class="tech-tag">Time-series ML models (Linear, Transformer)</span>
+                                <span class="tech-tag"><img src="/assets/icons/Platforms/Kafka.png" alt="Kafka"> Apache Kafka</span>
+                                <span class="tech-tag"><img src="/assets/icons/Tools/aws.png" alt="AWS"> AWS (compute, storage)</span>
+                                <span class="tech-tag">Distributed data processing frameworks</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Core Technical Skills Section -->
+        <section id="recruiter-skills" class="core-skills-section">
+            <h2 class="section-title">Core technical skills</h2>
+            <div class="section-divider"></div>
+            
+            <!-- Row 1: Programming & Engineering -->
+            <div class="skills-row">
+                <h2 class="section-title">Programming & engineering</h2>
+                <div class="skills-cards">
+                    <div class="skill-card primary" 
+                         data-skill="Python"
+                         data-tags='["Autonomous Creative Generation", "AI Applications"]'
+                         data-lines='["Prod-grade Python for AI systems", "Performance-aware, maintainable code"]'
+                         data-gradient="135deg, #667eea 0%, #764ba2 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <div class="card-label">Python</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">Python</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card" 
+                         data-skill="Backend Development"
+                         data-tags='["Creative Automation System", "Model Serving APIs"]'
+                         data-lines='["REST APIs, services, system integration"]'
+                         data-gradient="135deg, #4facfe 0%, #00f2fe 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <div class="card-label">Backend Development</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">Backend Development</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card" 
+                         data-skill="Data Structures & Algorithms"
+                         data-tags='["Creative Pipeline", "Real-time Processing"]'
+                         data-lines='["Algorithmic thinking for system performance"]'
+                         data-gradient="135deg, #f093fb 0%, #f5576c 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <div class="card-label">Data Structures & Algorithms</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">Data Structures & Algorithms</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card" 
+                         data-skill="Clean Architecture"
+                         data-tags='["Autonomous AI Systems", "Internal Platforms"]'
+                         data-lines='["Modular, testable system design", "Clear separation of concerns"]'
+                         data-gradient="135deg, #fa709a 0%, #fee140 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                            <i class="fas fa-sitemap"></i>
+                        </div>
+                        <div class="card-label">Clean Architecture</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">Clean Architecture</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card" 
+                         data-skill="Debugging & Optimization"
+                         data-tags='["Production AI Systems", "Model Inference Pipelines"]'
+                         data-lines='["RCA in live systems", "Latency, memory & compute"]'
+                         data-gradient="135deg, #30cfd0 0%, #330867 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                            <i class="fas fa-bug"></i>
+                        </div>
+                        <div class="card-label">Debugging & Optimization</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">Debugging & Optimization</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card" 
+                         data-skill="Git & Code Reviews"
+                         data-tags='["Team-based Development", "Production Releases"]'
+                         data-lines='["Collaborative workflows & version control", "Clean PRs & iterative improvement"]'
+                         data-gradient="135deg, #a8edea 0%, #fed6e3 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                            <i class="fab fa-git-alt"></i>
+                        </div>
+                        <div class="card-label">Git & Code Reviews</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">Git & Code Reviews</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 2: Core AI & Machine Learning -->
+            <div class="skills-row">
+                <h2 class="section-title">Core AI & machine learning</h2>
+                <div class="skills-cards">
+                    <div class="skill-card primary" 
+                         data-skill="LLMs & Generative AI"
+                         data-tags='["Autonomous Creative Generation", "AI Ideation Engine"]'
+                         data-lines='["Prompting, RAG, agents, fine-tuning", "Task-specific control GenAI"]'
+                         data-gradient="135deg, #667eea 0%, #764ba2 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <i class="fas fa-brain"></i>
+                        </div>
+                        <div class="card-label">LLMs & GenAI</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">LLMs & Generative AI</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card" 
+                         data-skill="Machine Learning"
+                         data-tags='["Forecasting System", "Recommendation Experiments"]'
+                         data-lines='["Supervised & unsupervised learning", "Feature engineering and evaluation"]'
+                         data-gradient="135deg, #f093fb 0%, #f5576c 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <div class="card-label">Machine Learning</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">Machine Learning</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card" 
+                         data-skill="Deep Learning"
+                         data-tags='["Vision Pipelines", "Generative Models"]'
+                         data-lines='["CNNs & transformer-based architectures", "Semantic Learning"]'
+                         data-gradient="135deg, #4facfe 0%, #00f2fe 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <i class="fas fa-network-wired"></i>
+                        </div>
+                        <div class="card-label">Deep Learning</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">Deep Learning</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card" 
+                         data-skill="Computer Vision"
+                         data-tags='["Creative Automation", "Image Inpainting System"]'
+                         data-lines='["Image generation and manipulation", "Visual understanding in production"]'
+                         data-gradient="135deg, #fa709a 0%, #fee140 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                            <i class="fas fa-eye"></i>
+                        </div>
+                        <div class="card-label">Computer Vision</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">Computer Vision</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card" 
+                         data-skill="Embeddings & Retrieval"
+                         data-tags='["RAG Pipelines", "Semantic Search"]'
+                         data-lines='["RAG-driven AI systems"]'
+                         data-gradient="135deg, #30cfd0 0%, #330867 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <div class="card-label">Embeddings & Retrieval</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">Embeddings & Retrieval</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card" 
+                         data-skill="Model Evaluation & Metrics"
+                         data-tags='["AI Quality Framework", "Experimentation Pipelines"]'
+                         data-lines='["Accuracy, quality, reliability tracking"]'
+                         data-gradient="135deg, #a8edea 0%, #fed6e3 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="card-label">Model Evaluation & Metrics</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">Model Evaluation & Metrics</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Row 3: Systems, Scale & Production -->
+            <div class="skills-row">
+                <h2 class="section-title">Systems, scale & production</h2>
+                <div class="skills-cards">
+                    <div class="skill-card" 
+                         data-skill="Data Pipelines"
+                         data-tags='["Creative Generation Platform", "AI systems"]'
+                         data-lines='["Batch and streaming workflows", "Scalable data ingestion and processing"]'
+                         data-gradient="135deg, #667eea 0%, #764ba2 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <i class="fas fa-stream"></i>
+                        </div>
+                        <div class="card-label">Data Pipelines</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">Data Pipelines</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card" 
+                         data-skill="MLOps"
+                         data-tags='["Production AI Systems", "Model Lifecycle Management"]'
+                         data-lines='["Training to deployment automation", "Monitoring and iteration loops"]'
+                         data-gradient="135deg, #f093fb 0%, #f5576c 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <div class="card-label">MLOps</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">MLOps</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card" 
+                         data-skill="Model Serving"
+                         data-tags='["Real-time Inference APIs", "Creative Generation System"]'
+                         data-lines='["Scalable, low-latency inference", "Reliability under production load"]'
+                         data-gradient="135deg, #4facfe 0%, #00f2fe 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <div class="card-label">Model Serving</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">Model Serving</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card" 
+                         data-skill="Cloud Infrastructure"
+                         data-tags='["AWS-based ML Systems", "Scalable AI Platforms"]'
+                         data-lines='["Compute, storage, orchestration", "Production cloud architecture"]'
+                         data-gradient="135deg, #fa709a 0%, #fee140 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                            <i class="fab fa-aws"></i>
+                        </div>
+                        <div class="card-label">Cloud Infrastructure (AWS)</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">Cloud Infrastructure</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card" 
+                         data-skill="Docker & Containers"
+                         data-tags='["Model Deployment", "CI/CD Pipelines"]'
+                         data-lines='["Reproducible deployment environments", "Consistent runtime"]'
+                         data-gradient="135deg, #30cfd0 0%, #330867 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                            <i class="fab fa-docker"></i>
+                        </div>
+                        <div class="card-label">Docker & Containers</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">Docker & Containers</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="skill-card" 
+                         data-skill="Performance & Cost Optimization"
+                         data-tags='["scaled AI Systems", "Inference Optimization"]'
+                         data-lines='["Latency optimization", "Cost-aware system design"]'
+                         data-gradient="135deg, #a8edea 0%, #fed6e3 100%">
+                        <div class="card-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                            <i class="fas fa-tachometer-alt"></i>
+                        </div>
+                        <div class="card-label">Performance & Cost Optimization</div>
+                        <div class="skill-expanded">
+                            <div class="expanded-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+                                <div class="expanded-overlay"></div>
+                            </div>
+                            <div class="expanded-content">
+                                <h3 class="expanded-title">Performance & Cost Optimization</h3>
+                                <div class="expanded-tags"></div>
+                                <div class="expanded-lines"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Education Section -->
+        <section id="recruiter-education" class="recruiter-section">
+            <h2 class="section-title">Education</h2>
+            <div class="section-divider"></div>
+            <div class="education-container">
+                <div class="education-card">
+                    <div class="education-header">
+                        <h3 class="education-degree">B.Tech. in Mathematics & Computing</h3>
+                        <h4 class="education-institution">Indian Institute of Technology, Delhi</h4>
+                    </div>
+                    <div class="education-meta">
+                        <span class="education-date"><i class="far fa-calendar"></i> Oct 2021 - May 2025</span>
+                        <span class="education-grade">Grade: 70%</span>
+                    </div>
+                </div>
+                <div class="education-divider"></div>
+                <div class="education-card">
+                    <div class="education-header">
+                        <h3 class="education-degree">High School (12th Grade)</h3>
+                        <h4 class="education-institution">Stephens International Public School</h4>
+                    </div>
+                    <div class="education-meta">
+                        <span class="education-date"><i class="far fa-calendar"></i> March 2019 - May 2021</span>
+                        <span class="education-grade">Grade: 95%</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Achievements Section -->
+        <section id="recruiter-achievements" class="core-skills-section">
+            <h2 class="section-title">Achievements</h2>
+            <div class="section-divider"></div>
+            <div class="skills-cards">
+                <div class="skill-card primary" 
+                     data-skill="JEE Advanced & Mains 2021"
+                     data-tags='["Academic Excellence", "Competitive Exam"]'
+                     data-lines='["Secured 99.89 percentile nationwide among 1M+ candidates"]'
+                     data-gradient="135deg, #667eea 0%, #764ba2 100%">
+                    <div class="card-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="card-label">JEE Advanced & Mains 2021</div>
+                    <div class="skill-expanded">
+                        <div class="expanded-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                            <div class="expanded-overlay"></div>
+                        </div>
+                        <div class="expanded-content">
+                            <h3 class="expanded-title">JEE Advanced & Mains 2021</h3>
+                            <div class="expanded-tags"></div>
+                            <div class="expanded-lines"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-card" 
+                     data-skill="NTSE Scholar 2019"
+                     data-tags='["National Recognition", "Scholarship"]'
+                     data-lines='["Awarded National Talent Scholarship among 1M+ students"]'
+                     data-gradient="135deg, #f093fb 0%, #f5576c 100%">
+                    <div class="card-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                        <i class="fas fa-star"></i>
+                    </div>
+                    <div class="card-label">NTSE Scholar 2019</div>
+                    <div class="skill-expanded">
+                        <div class="expanded-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                            <div class="expanded-overlay"></div>
+                        </div>
+                        <div class="expanded-content">
+                            <h3 class="expanded-title">NTSE Scholar 2019</h3>
+                            <div class="expanded-tags"></div>
+                            <div class="expanded-lines"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-card" 
+                     data-skill="Samsung SWC Test"
+                     data-tags='["Technical Competency", "Industry Recognition"]'
+                     data-lines='["Qualified Samsung Advanced Software Competency Test on first attempt"]'
+                     data-gradient="135deg, #4facfe 0%, #00f2fe 100%">
+                    <div class="card-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <div class="card-label">Samsung SWC Test</div>
+                    <div class="skill-expanded">
+                        <div class="expanded-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                            <div class="expanded-overlay"></div>
+                        </div>
+                        <div class="expanded-content">
+                            <h3 class="expanded-title">Samsung SWC Test</h3>
+                            <div class="expanded-tags"></div>
+                            <div class="expanded-lines"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skill-card" 
+                     data-skill="Regional Mathematical Olympiad"
+                     data-tags='["Mathematical Excellence", "Olympiad"]'
+                     data-lines='["Received certificate of merit twice for mathematical excellence"]'
+                     data-gradient="135deg, #fa709a 0%, #fee140 100%">
+                    <div class="card-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <i class="fas fa-medal"></i>
+                    </div>
+                    <div class="card-label">Regional Mathematical Olympiad</div>
+                    <div class="skill-expanded">
+                        <div class="expanded-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                            <div class="expanded-overlay"></div>
+                        </div>
+                        <div class="expanded-content">
+                            <h3 class="expanded-title">Regional Mathematical Olympiad</h3>
+                            <div class="expanded-tags"></div>
+                            <div class="expanded-lines"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="recruiter-contact" class="recruiter-section recruiter-contact-section">
+            <h2 class="section-title">Hire me</h2>
+            <div class="section-divider"></div>
+            <div class="contact-content">
+                <p class="contact-subtitle">Ready to build something amazing together?</p>
+                <div class="contact-cta-buttons">
+                    <button class="btn btn-primary-cta" onclick="scheduleInterview()">
+                        <i class="fas fa-calendar-check"></i> Schedule Interview
+                    </button>
+                    <button class="btn btn-secondary-cta" onclick="downloadResume()">
+                        <i class="fas fa-file-pdf"></i> Download Resume
+                    </button>
+                    <a href="mailto:shashwatrajiitd@gmail.com" class="btn btn-info-cta" onclick="if(typeof openEmail === 'function') { openEmail(); return false; }">
+                        <i class="fas fa-envelope"></i> Email Me
+                    </a>
+                </div>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <span>shashwatrajiitd@gmail.com</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <span>Mumbai, India</span>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fab fa-linkedin"></i>
+                        <span>shashwatrajiitd</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer class="recruiter-footer">
+            <p>&copy; 2025 Shashwat Raj. Professional Portfolio.</p>
+        </footer>
+    </main>
+</div>

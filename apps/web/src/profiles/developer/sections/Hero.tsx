@@ -1,0 +1,85 @@
+'use client'
+
+import { useEffect, useRef } from 'react'
+
+export function DeveloperHero() {
+  const videoContainerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    // TODO: Initialize video carousel
+    // This will be migrated from the original developer.js
+    const initializeVideoCarousel = () => {
+      const container = videoContainerRef.current
+      if (!container) return
+
+      const videos = ['v0.mp4', 'v1.mp4', 'v2.mp4']
+      let currentIndex = 0
+
+      videos.forEach((videoFile, index) => {
+        const video = document.createElement('video')
+        video.className = 'hero-video'
+        video.src = `/assets/bg_videos/developer_profile/${videoFile}`
+        video.autoplay = true
+        video.muted = true
+        video.loop = true
+        video.playsInline = true
+        video.preload = 'auto'
+
+        if (index === 0) {
+          video.classList.add('active')
+        }
+
+        container.appendChild(video)
+      })
+
+      // Auto-rotate videos
+      const switchVideo = () => {
+        const videos = container.querySelectorAll('.hero-video')
+        if (videos.length === 0) return
+
+        videos[currentIndex].classList.remove('active')
+        currentIndex = (currentIndex + 1) % videos.length
+        videos[currentIndex].classList.add('active')
+      }
+
+      setInterval(switchVideo, 10000) // Switch every 10 seconds
+    }
+
+    initializeVideoCarousel()
+  }, [])
+
+  return (
+    <section className="developer-hero" id="developer-hero">
+      <div className="hero-background">
+        <div id="hero-video-container" className="hero-video-container" ref={videoContainerRef}></div>
+        <div className="hero-overlay"></div>
+      </div>
+      <div className="developer-hero-content">
+        <h1 className="developer-hero-title">Shaz.dev</h1>
+        <h2 className="developer-hero-subtitle">AI Software Developer</h2>
+        <p className="hero-description">
+          Architecting autonomous multi-agent GenAI pipelines with LLMs, VLMs, GenAI models, and MLOps orchestration - accelerating inference & engineering end-to-end production AI at scale.
+        </p>
+        <div className="hero-cta-buttons">
+          <button
+            className="btn btn-primary-cta"
+            onClick={() => {
+              const link = document.createElement('a')
+              link.href = '/assets/resume/shashwat_resume.pdf'
+              link.download = 'shashwat_resume.pdf'
+              link.click()
+            }}
+          >
+            <i className="fas fa-play"></i> Resume
+          </button>
+          <button
+            className="btn btn-secondary-cta"
+            onClick={() => window.open('https://www.linkedin.com/in/shashwatrajiitd/', '_blank')}
+          >
+            <i className="fas fa-info-circle"></i> LinkedIn
+          </button>
+        </div>
+      </div>
+    </section>
+  )
+}

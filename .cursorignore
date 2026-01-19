@@ -1,0 +1,16 @@
+# Cursor ignore file
+node_modules/
+.next/
+.turbo/
+dist/
+build/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.venv/
+.DS_Store
+*.log

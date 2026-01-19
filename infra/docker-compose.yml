@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  # Frontend (Next.js)
+  web:
+    build:
+      context: ../apps/web
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      - NEXT_PUBLIC_API_URL=http://api:8000
+    depends_on:
+      - api
+    volumes:
+      - ../apps/web:/app
+      - /app/node_modules
+      - /app/.next
+
+  # Backend (FastAPI)
+  api:
+    build:
+      context: ../apps/api
+      dockerfile: Dockerfile
+    ports:
+      - "8000:8000"
+    environment:
+      - DEBUG=true
+      - CORS_ORIGINS=http://localhost:3000,http://localhost:3001
+    volumes:
+      - ../apps/api:/app
+    # TODO: Add when RAG is implemented
+    # - ./data/vectorstore:/app/data/vectorstore
+
+  # TODO: Add vector database when RAG is implemented
+  # chromadb:
+  #   image: chromadb/chroma:latest
+  #   ports:
+  #     - "8001:8000"
+  #   volumes:
+  #     - ./data/chromadb:/chroma/chroma
